@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void GotoETF(View view) {
-        Intent intent = new Intent(this, Found_choice.class);
+        Intent intent = new Intent(this, ETF_Result.class);
         startActivity(intent);
     }
 }

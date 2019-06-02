@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ETF -->
+    <string-array name="list_ETF">
+        <item>ETF_1</item>
+        <item>ETF_2</item>
+        <item>ETF_3</item>
+    </string-array>
+    <!-- Positive -->
+    <string-array name="list_fund_pos_stock">
+        <item>積極 股票型 1</item>
+        <item>積極 股票型 2</item>
+        <item>積極 股票型 3</item>
+    </string-array>
+    <string-array name="list_fund_pos_bond">
+        <item>積極 債券型 1</item>
+        <item>積極 債券型 2</item>
+        <item>積極 債券型 3</item>
+    </string-array>
+    <string-array name="list_fund_pos_balance">
+        <item>積極 平衡型 1</item>
+        <item>積極 平衡型 2</item>
+        <item>積極 平衡型 3</item>
+    </string-array>
+    <string-array name="list_fund_pos_currency">
+        <item>積極 貨幣型 1</item>
+        <item>積極 貨幣型 2</item>
+        <item>積極 貨幣型 3</item>
+    </string-array>
+    <string-array name="list_fund_pos_all">
+        <item>積極 全部 1</item>
+        <item>積極 全部 2</item>
+        <item>積極 全部 3</item>
+    </string-array>
+    <!-- Balance -->
+    <string-array name="list_fund_balance_stock">
+        <item>平衡 股票型 1</item>
+        <item>平衡 股票型 2</item>
+        <item>平衡 股票型 3</item>
+    </string-array>
+    <string-array name="list_fund_balance_bond">
+        <item>平衡 債券型 1</item>
+        <item>平衡 債券型 2</item>
+        <item>平衡 債券型 3</item>
+    </string-array>
+    <string-array name="list_fund_balance_balance">
+        <item>平衡 平衡型 1</item>
+        <item>平衡 平衡型 2</item>
+        <item>平衡 平衡型 3</item>
+    </string-array>
+    <string-array name="list_fund_balance_currency">
+        <item>平衡 貨幣型 1</item>
+        <item>平衡 貨幣型 2</item>
+        <item>平衡 貨幣型 3</item>
+    </string-array>
+    <string-array name="list_fund_balance_all">
+        <item>平衡 全部 1</item>
+        <item>平衡 全部 2</item>
+        <item>平衡 全部 3</item>
+    </string-array>
+    <!-- Conservative -->
+    <string-array name="list_fund_csv_stock">
+        <item>保守 股票型 1</item>
+        <item>保守 股票型 2</item>
+        <item>保守 股票型 3</item>
+    </string-array>
+    <string-array name="list_fund_csv_bond">
+        <item>保守 債券型 1</item>
+        <item>保守 債券型 2</item>
+        <item>保守 債券型 3</item>
+    </string-array>
+    <string-array name="list_fund_csv_balance">
+        <item>保守 平衡型 1</item>
+        <item>保守 平衡型 2</item>
+        <item>保守 平衡型 3</item>
+    </string-array>
+    <string-array name="list_fund_csv_currency">
+        <item>保守 貨幣型 1</item>
+        <item>保守 貨幣型 2</item>
+        <item>保守 貨幣型 3</item>
+    </string-array>
+    <string-array name="list_fund_csv_all">
+        <item>保守 全部 1</item>
+        <item>保守 全部 2</item>
+        <item>保守 全部 3</item>
+    </string-array>
+
+</resources>
