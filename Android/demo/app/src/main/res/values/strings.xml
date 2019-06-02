@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">demo</string>
+    <string name="text_load">Loading...</string>
+    <string name="default_label_date">資料日期： </string>
+</resources>
