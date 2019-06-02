@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ETF_Result"
+        <activity android:name=".Fund_Description"
             android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".ETF_Result"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Found_Result"
             android:parentActivityName=".Found_choice" />

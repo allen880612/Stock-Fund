@@ -1,5 +1,6 @@
 package android.example.demo;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,11 +27,12 @@ import java.util.Map;
 import java.util.Set;
 
 public class PHPAsyncTask extends
-        AsyncTask<String, String,  Map<String, ArrayList< StockHolder >> > {
+        AsyncTask<String, String,  Map<String, ArrayList< StockHolder >>> {
 
     private WeakReference<TextView> tv_stock1, tv_stock2;
     private WeakReference<RecyclerView> recycleView_1, recycleView_2;
     private final Context mainContext;
+    private StockManager shManager;
 
     // Constructor RecycleView
     public PHPAsyncTask(Context context, RecyclerView _rv1, RecyclerView _rv2)
@@ -38,6 +40,7 @@ public class PHPAsyncTask extends
         mainContext = context;
         recycleView_1 = new WeakReference<>(_rv1);
         recycleView_2 = new WeakReference<>(_rv2);
+        shManager = new StockManager();
     }
     // Constructor TextView
     public PHPAsyncTask(Context context, TextView _tv1, TextView _tv2)
@@ -45,28 +48,54 @@ public class PHPAsyncTask extends
         mainContext = context;
         tv_stock1 = new WeakReference<>(_tv1);
         tv_stock2 = new WeakReference<>(_tv2);
+        shManager = new StockManager();
     }
 
-
-
     @Override
-    protected  Map<String, ArrayList< StockHolder >> doInBackground( String... urls) {
+    protected Map<String, ArrayList< StockHolder >> doInBackground( String... urls) {
         //ArrayMap< String, ArrayList< StockHolder > > stockMap = new ArrayMap< >();
         Map<String, ArrayList< StockHolder >> stockMap = new HashMap<>();
         ArrayList<StockHolder> stock = new ArrayList<StockHolder>();
         // Get json data form sever
         String jsonData_0 = GetData(urls[0], "0");
         String jsonData_1 = GetData(urls[0], "1");
+
+        shManager.AddStocktoMap("s1", GetStock(jsonData_0));
+        shManager.AddStocktoMap("s2", GetStock(jsonData_1));
+
         // parser json to StockHolder store information
         stockMap.put("s1", GetStock(jsonData_0));   //做多
         stockMap.put("s2", GetStock(jsonData_1));   //做空
         Log.d("run", "DoInBackground");
         return stockMap;
-
-//        stock = GetStock(jsonData_0);       //做多
-//        stock.addAll(GetStock(jsonData_1)); //做空
-//        return stock;
     }
+
+//    @Override
+//    protected String doInBackground( String... urls) {
+//        //ArrayMap< String, ArrayList< StockHolder > > stockMap = new ArrayMap< >();
+//        Map<String, ArrayList< StockHolder >> stockMap = new HashMap<>();
+//        ArrayList<StockHolder> stock = new ArrayList<StockHolder>();
+//        // Get json data form sever
+//        String jsonData_0 = GetData(urls[0], "0");
+//        String jsonData_1 = GetData(urls[0], "1");
+//
+//        shManager.AddStocktoMap("s1", GetStock(jsonData_0));
+//        shManager.AddStocktoMap("s2", GetStock(jsonData_1));
+//
+//        // parser json to StockHolder store information
+//        stockMap.put("s1", GetStock(jsonData_0));   //做多
+//        stockMap.put("s2", GetStock(jsonData_1));   //做空
+//        Log.d("run", "DoInBackground");
+//        return ":>}";
+//    }
+
+    // onPostExecute displays the results of the AsyncTask.
+//    @Override
+//    protected void onPostExecute(String _result) {
+//
+//        Intent intent = new Intent(mainContext, Load.class);
+//        //GetResult(shManager.map_stock);
+//    }
 
     // onPostExecute displays the results of the AsyncTask.
     @Override
@@ -80,7 +109,15 @@ public class PHPAsyncTask extends
         recycleView_2.get().setLayoutManager(new LinearLayoutManager(mainContext));
         Log.d("run", "PostExecute");
         Log.d("Result: ", "> " + _result);
+
+        //GetResult(_result);
     }
+
+    public Map<String, ArrayList< StockHolder >> GetResult(Map<String, ArrayList< StockHolder >> _result)
+    {
+        return _result;
+    }
+
 
     // Get Today date
     private String GetDate()
