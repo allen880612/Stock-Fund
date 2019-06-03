@@ -160,13 +160,14 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
                             isExisted = true;
                         }
                     }
-                    if (!isExisted /*&& isToday*/)
+                    if (!isExisted && isToday)
                         resultStock.add(new StockHolder(mCode, mName, mPrice, mDate, mType));
 
                     Log.d("run", "GetStock");
                 }
                 catch (JSONException e)
                 {
+                    e.printStackTrace();
                 }
             }
         }

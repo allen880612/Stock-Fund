@@ -2,4 +2,34 @@
     <string name="app_name">demo</string>
     <string name="text_load">Loading...</string>
     <string name="default_label_date">資料日期： </string>
+    <string name="btn_start_text">開始推薦</string>
+    <string name="label_menu">獲取數據中</string>
+    <string name="label_finish">資料更新完成!</string>
+    <string name="label_tool">指標</string>
+    <string name="label_strategy">策略概述</string>
+    <string name="label_case1">做多策略</string>
+    <string name="label_case2">放空策略</string>
+    <string name="description_tool">
+        SMA200：判斷作多或是作空\nSMA5：判斷平倉時機\nRSI 2：判斷入市時機</string>
+
+    <string name="case1">
+       \t1: 當股價高於SMA200時作多\n
+       \t2: RSI(2)低於10以下，為買入訊號</string>
+
+    <string name="case2">
+        \t1: 當股價低於SMA200時放空\n
+        \t2: RSI(2)高於90以上，為放空訊號</string>
+
+    <string name="back_case1">
+        \t動態投資組合報酬比大盤高: 6.67%\n
+        \t年化報酬率: 680.04%\n
+        \t大盤指數年化報酬率: 103.73%
+    </string>
+
+    <string name="back_case2">
+        \t動態投資組合報酬比大盤高: 17.67%\n
+        \t年化報酬率: $138.91%$\n
+        \t大盤指數年化報酬率: -58.1%
+    </string>
+
 </resources>

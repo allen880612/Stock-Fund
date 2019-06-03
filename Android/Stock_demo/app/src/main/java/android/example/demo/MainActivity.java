@@ -1,5 +1,6 @@
 package android.example.demo;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,29 +24,36 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_stock1, tv_stock2, tv_date;
     private RecyclerView recyclerView_1, recyclerView_2;
     private String mURL;
-    private ArrayList<StockHolder> stockList_1, stockList_2;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Initialize();
-        stockList_1 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_1");
-        stockList_2 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_2");
         SetRecycleView();
     }
 
     void Initialize()
     {
-        mURL = "https://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
+        // Are you fucking kidding me?
+        mURL = "http://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
+        //mURL = "https://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
         recyclerView_1 = findViewById(R.id.recycleView_1);
         recyclerView_2 = findViewById(R.id.recycleView_2);
         tv_date = findViewById(R.id.tv_date);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
         SetDate();
         //AsyncTask task = new PHPAsyncTask(this, recyclerView_1, recyclerView_2).execute(mURL);
     }
 
     private void SetRecycleView()
     {
+        ArrayList<StockHolder> stockList_1, stockList_2;
+        stockList_1 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_1");
+        stockList_2 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_2");
         StockInfoAdapter adapter1 = new StockInfoAdapter(this, stockList_1);
         StockInfoAdapter adapter2 = new StockInfoAdapter(this, stockList_2);
         recyclerView_1.setAdapter(adapter1);
@@ -72,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void Refresh(View view) {
         SetDate();
-        new PHPAsyncTask(this, recyclerView_1, recyclerView_2).execute(mURL);
+
+        new PHPAsyncTask(this, recyclerView_1, recyclerView_2, progressBar, tv_date, (Button)view).execute(mURL);
     }
 
 }

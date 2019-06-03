@@ -9,7 +9,39 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="LabelFont" parent="@android:style/TextAppearance.Medium">
+    <style name="Label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlue</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <!--<item name="android:gravity">center</item>-->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Label_small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:textSize">28sp</item>
+        <!--<item name="android:lineSpacingMultiplier">1.5</item>-->
+        <item name="android:layout_marginTop">20dp</item>
+        <!--<item name="android:gravity">center</item>-->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="description">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <!--<item name="android:gravity">center</item>-->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="LabelFont">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
@@ -48,6 +80,15 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorPrice</item>
+    </style>
+
+    <style name="Button" parent="@style/Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorButtonText</item>
     </style>
 
 </resources>

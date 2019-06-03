@@ -6,4 +6,7 @@
     <color name="colorName">#1B96D8</color>
     <color name="colorPrice">#27B61B</color>
     <color name="colorButtonText">#B7CAE2</color>
+    <color name="colorBlack">#02081F</color>
+    <color name="colorRed">#8A0D29</color>
+    <color name="colorBlue">#3F51B5</color>
 </resources>

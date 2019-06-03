@@ -1,4 +1,5 @@
 package android.example.demo;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -6,7 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,45 +31,74 @@ import java.util.Map;
 import java.util.Set;
 
 public class PHPAsyncTask extends
-        AsyncTask<String, String,  Map<String, ArrayList< StockHolder >>> {
+        AsyncTask<String, Integer,  Map<String, ArrayList< StockHolder >>> {
 
-    private WeakReference<TextView> tv_stock1, tv_stock2;
+    private WeakReference<TextView> tv_stock1, tv_stock2, tv_date;
     private WeakReference<RecyclerView> recycleView_1, recycleView_2;
-    private final Context mainContext;
+    private WeakReference<ProgressBar> progressBar;
+    private WeakReference<Button> btn_refresh;
+
+    private final WeakReference<Context> mContext;
     private StockManager shManager;
 
     // Constructor RecycleView
-    public PHPAsyncTask(Context context, RecyclerView _rv1, RecyclerView _rv2)
+    public PHPAsyncTask(Context context, RecyclerView _rv1, RecyclerView _rv2, ProgressBar _pb, TextView _date, Button _btn)
     {
-        mainContext = context;
+        mContext = new WeakReference<>(context);
         recycleView_1 = new WeakReference<>(_rv1);
         recycleView_2 = new WeakReference<>(_rv2);
-        shManager = new StockManager();
+        progressBar = new WeakReference<>(_pb);
+        tv_date = new WeakReference<>(_date);
+        btn_refresh = new WeakReference<>(_btn);
+
     }
-    // Constructor TextView
-    public PHPAsyncTask(Context context, TextView _tv1, TextView _tv2)
-    {
-        mainContext = context;
-        tv_stock1 = new WeakReference<>(_tv1);
-        tv_stock2 = new WeakReference<>(_tv2);
-        shManager = new StockManager();
+
+//    // Constructor TextView
+//    public PHPAsyncTask(Context context, TextView _tv1, TextView _tv2, ProgressBar _pb)
+//    {
+//        mainContext = context;
+//        tv_stock1 = new WeakReference<>(_tv1);
+//        tv_stock2 = new WeakReference<>(_tv2);
+//        progressBar = new WeakReference<>(_pb);
+//        shManager = new StockManager();
+//    }
+
+    // Pre do Something in here
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressBar.get().setProgress(0);
+        progressBar.get().setVisibility(View.VISIBLE);
+        tv_date.get().setVisibility(View.GONE);
+        btn_refresh.get().setEnabled(false);
+    }
+
+    // Update
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+
+        progressBar.get().setProgress(values[0]);
     }
 
     @Override
     protected Map<String, ArrayList< StockHolder >> doInBackground( String... urls) {
-        //ArrayMap< String, ArrayList< StockHolder > > stockMap = new ArrayMap< >();
+
         Map<String, ArrayList< StockHolder >> stockMap = new HashMap<>();
         ArrayList<StockHolder> stock = new ArrayList<StockHolder>();
+
         // Get json data form sever
         String jsonData_0 = GetData(urls[0], "0");
+        publishProgress(25);
         String jsonData_1 = GetData(urls[0], "1");
-
-        shManager.AddStocktoMap("s1", GetStock(jsonData_0));
-        shManager.AddStocktoMap("s2", GetStock(jsonData_1));
+        publishProgress(50);
 
         // parser json to StockHolder store information
         stockMap.put("s1", GetStock(jsonData_0));   //做多
+        publishProgress(75);
         stockMap.put("s2", GetStock(jsonData_1));   //做空
+        publishProgress(100);
+
         Log.d("run", "DoInBackground");
         return stockMap;
     }
@@ -74,21 +107,19 @@ public class PHPAsyncTask extends
     @Override
     protected void onPostExecute(Map<String, ArrayList< StockHolder >> _result) {
 
-        StockInfoAdapter adapter1 = new StockInfoAdapter(mainContext, _result.get("s1"));
-        StockInfoAdapter adapter2 = new StockInfoAdapter(mainContext, _result.get("s2"));
+        StockInfoAdapter adapter1 = new StockInfoAdapter(mContext.get(), _result.get("s1"));
+        StockInfoAdapter adapter2 = new StockInfoAdapter(mContext.get(), _result.get("s2"));
         recycleView_1.get().setAdapter(adapter1);
-        recycleView_1.get().setLayoutManager(new LinearLayoutManager(mainContext));
+        recycleView_1.get().setLayoutManager(new LinearLayoutManager(mContext.get()));
         recycleView_2.get().setAdapter(adapter2);
-        recycleView_2.get().setLayoutManager(new LinearLayoutManager(mainContext));
+        recycleView_2.get().setLayoutManager(new LinearLayoutManager(mContext.get()));
+
+        progressBar.get().setVisibility(View.GONE);
+        tv_date.get().setVisibility(View.VISIBLE);
+        btn_refresh.get().setEnabled(true);
+
         Log.d("run", "PostExecute");
         Log.d("Result: ", "> " + _result);
-
-        //GetResult(_result);
-    }
-
-    public Map<String, ArrayList< StockHolder >> GetResult(Map<String, ArrayList< StockHolder >> _result)
-    {
-        return _result;
     }
 
     // Get Today date
@@ -124,6 +155,7 @@ public class PHPAsyncTask extends
             URL url = new URL(_url + _signal);
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
+
             InputStream stream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(stream));
             StringBuffer buffer = new StringBuffer();
