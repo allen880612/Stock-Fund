@@ -1,97 +1,57 @@
 package android.example.demo;
+
 import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.ArrayMap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
-import android.widget.Adapter;
-import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
-public class PHPAsyncTask extends
-        AsyncTask<String, String,  Map<String, ArrayList< StockHolder >>> {
-
-    private WeakReference<TextView> tv_stock1, tv_stock2;
-    private WeakReference<RecyclerView> recycleView_1, recycleView_2;
-    private final Context mainContext;
-    private StockManager shManager;
-
-    // Constructor RecycleView
-    public PHPAsyncTask(Context context, RecyclerView _rv1, RecyclerView _rv2)
-    {
-        mainContext = context;
-        recycleView_1 = new WeakReference<>(_rv1);
-        recycleView_2 = new WeakReference<>(_rv2);
-        shManager = new StockManager();
-    }
-    // Constructor TextView
-    public PHPAsyncTask(Context context, TextView _tv1, TextView _tv2)
-    {
-        mainContext = context;
-        tv_stock1 = new WeakReference<>(_tv1);
-        tv_stock2 = new WeakReference<>(_tv2);
-        shManager = new StockManager();
+public class StockLoader extends AsyncTaskLoader<StockManager>
+{
+    private String mUrl;
+    private StockManager sManager;
+    // Constructor
+    public StockLoader(@NonNull Context context, String _url) {
+        super(context);
+        mUrl = _url;
+        sManager = new StockManager();
     }
 
     @Override
-    protected Map<String, ArrayList< StockHolder >> doInBackground( String... urls) {
-        //ArrayMap< String, ArrayList< StockHolder > > stockMap = new ArrayMap< >();
-        Map<String, ArrayList< StockHolder >> stockMap = new HashMap<>();
-        ArrayList<StockHolder> stock = new ArrayList<StockHolder>();
-        // Get json data form sever
-        String jsonData_0 = GetData(urls[0], "0");
-        String jsonData_1 = GetData(urls[0], "1");
-
-        shManager.AddStocktoMap("s1", GetStock(jsonData_0));
-        shManager.AddStocktoMap("s2", GetStock(jsonData_1));
-
-        // parser json to StockHolder store information
-        stockMap.put("s1", GetStock(jsonData_0));   //做多
-        stockMap.put("s2", GetStock(jsonData_1));   //做空
-        Log.d("run", "DoInBackground");
-        return stockMap;
+    protected void onStartLoading() {
+        super.onStartLoading();
+        forceLoad();
     }
 
-    // onPostExecute displays the results of the AsyncTask.
+    @Nullable
     @Override
-    protected void onPostExecute(Map<String, ArrayList< StockHolder >> _result) {
-
-        StockInfoAdapter adapter1 = new StockInfoAdapter(mainContext, _result.get("s1"));
-        StockInfoAdapter adapter2 = new StockInfoAdapter(mainContext, _result.get("s2"));
-        recycleView_1.get().setAdapter(adapter1);
-        recycleView_1.get().setLayoutManager(new LinearLayoutManager(mainContext));
-        recycleView_2.get().setAdapter(adapter2);
-        recycleView_2.get().setLayoutManager(new LinearLayoutManager(mainContext));
-        Log.d("run", "PostExecute");
-        Log.d("Result: ", "> " + _result);
-
-        //GetResult(_result);
-    }
-
-    public Map<String, ArrayList< StockHolder >> GetResult(Map<String, ArrayList< StockHolder >> _result)
+    public StockManager loadInBackground()
     {
-        return _result;
+        Log.d("auau", "loadinBK");
+        String jsonData_0 = GetData(mUrl, "0");
+        String jsonData_1 = GetData(mUrl, "1");
+
+        sManager.AddStocktoMap("s1", GetStock(jsonData_0));
+        sManager.AddStocktoMap("s2", GetStock(jsonData_1));
+        return sManager;
     }
 
-    // Get Today date
+
+
     private String GetDate()
     {
         Calendar calendar = Calendar.getInstance();
@@ -183,8 +143,8 @@ public class PHPAsyncTask extends
                     String mName = jdata.getString("name");
                     String mPrice = jdata.getString("price");
 
-                    mResult += mCode + " " + mName + " " + mPrice + " " + mDate + "\n";
-
+                    mResult += mCode + " " + mName + " 收盤價：" + mPrice + "\n";
+                    Log.d("stockData", mResult + " date:" +  mDate);
                     // Check stock had existed in array
                     Boolean isExisted = false;
                     Boolean isToday = true;
@@ -200,7 +160,7 @@ public class PHPAsyncTask extends
                             isExisted = true;
                         }
                     }
-                    if (!isExisted && isToday)
+                    if (!isExisted /*&& isToday*/)
                         resultStock.add(new StockHolder(mCode, mName, mPrice, mDate, mType));
 
                     Log.d("run", "GetStock");
@@ -215,8 +175,7 @@ public class PHPAsyncTask extends
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Log.d("stockData", mResult);
+
         return resultStock;
     }
-
 }

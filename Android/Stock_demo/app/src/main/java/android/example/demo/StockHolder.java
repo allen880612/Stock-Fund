@@ -1,6 +1,13 @@
 package android.example.demo;
 
-public class StockHolder {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class StockHolder implements Serializable {
+
+    private static final long serialVersionUID = 2333;
     public StockHolder(String _code, String _name, String _price, String _date, String _type)
     {
         code = _code;
@@ -38,4 +45,5 @@ public class StockHolder {
     public String price;
     public String type;
     public String action;
+
 }
