@@ -39,7 +39,7 @@ public class PHPAsyncTask extends
     private WeakReference<Button> btn_refresh;
 
     private final WeakReference<Context> mContext;
-    private StockManager shManager;
+    private StockManager sManager;
 
     // Constructor RecycleView
     public PHPAsyncTask(Context context, RecyclerView _rv1, RecyclerView _rv2, ProgressBar _pb, TextView _date, Button _btn)
@@ -224,16 +224,6 @@ public class PHPAsyncTask extends
                     if (!mDate.equals(GetDate()))
                         isToday = false;
 
-                    for (StockHolder sh : resultStock)
-                    {
-                        Log.d("Existed?",  mCode + " = " + sh.code);
-                        if (mCode.equals(sh.code))
-                        {
-                            isExisted = true;
-                        }
-                    }
-                    if (!isExisted && isToday)
-                        resultStock.add(new StockHolder(mCode, mName, mPrice, mDate, mType));
 
                     Log.d("run", "GetStock");
                 }

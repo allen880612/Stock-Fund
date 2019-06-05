@@ -16,16 +16,20 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Load extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks< ArrayList<StockHolder> > {
+        implements LoaderManager.LoaderCallbacks< StockManager > {
 
     private final String URL = "URL";
-    private String severURL;
+    private final String STOCK = "STOCK";
+
     private TextView label_menu;
     private ProgressBar progressBar;
     private Button btn_start;
+
     private boolean isLoading;
+
     private Intent mIntent;
 
     @Override
@@ -35,6 +39,7 @@ public class Load extends AppCompatActivity
         setContentView(R.layout.activity_load);
 
         Initialize();
+
     }
 
     void Initialize()
@@ -47,7 +52,6 @@ public class Load extends AppCompatActivity
         progressBar.setVisibility(View.VISIBLE);
         btn_start.setVisibility(View.INVISIBLE);
 
-        severURL = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/";
 //        Bundle queryBundle = new Bundle();
 //        String API = "BABA0010-14663b";
 ////        queryBundle.putString(URL, API);
@@ -57,12 +61,6 @@ public class Load extends AppCompatActivity
         {
             LoaderManager.getInstance(this).initLoader(0,null,this);
         }
-        //LoadDataFromSever();
-
-    }
-
-    void LoadDataFromSever()
-    {
 
     }
 
@@ -76,18 +74,29 @@ public class Load extends AppCompatActivity
 
     @NonNull
     @Override
-    public Loader<ArrayList<StockHolder>> onCreateLoader(int i, @Nullable Bundle args) {
+    public Loader< StockManager > onCreateLoader(int i, @Nullable Bundle args) {
         Log.d("auau", "Start Load");
         String API = "BABA0010-14663b";
         return new StockLoader(this, API);
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<ArrayList<StockHolder>> loader, ArrayList<StockHolder> stockHolders) {
+    public void onLoadFinished(@NonNull Loader< StockManager > loader, StockManager sManager) {
         Log.d("auau", "Finish Load");
+
         mIntent = new Intent(this, Description.class);
         Bundle mBundle = new Bundle();
+
+        ArrayList<StockHolder> choice_stock = sManager.GetTop50().get("close");
+
+//        for (StockHolder sh : choice_stock)
+//        {
+//            Log.d("auau chose", sh.GetCode() + " Close Price : " + sh.GetClose());
+//        }
+
+        mBundle.putSerializable(STOCK, (Serializable) choice_stock);
         mIntent.putExtras(mBundle);
+
         isLoading = false;
 
         label_menu.setText(getString(R.string.label_finish));
@@ -96,7 +105,7 @@ public class Load extends AppCompatActivity
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<ArrayList<StockHolder>> loader) {
+    public void onLoaderReset(@NonNull Loader< StockManager > loader) {
 
     }
 }

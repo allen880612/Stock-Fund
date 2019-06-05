@@ -19,15 +19,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Calendar;
+import java.util.*;
 
-public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
+
+public class StockLoader extends AsyncTaskLoader<StockManager>
 {
     private String API;
     private final String DATA_URL = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/";
     private final String TOKEN_URL = "https://owl.cmoney.com.tw/OwlApi/auth";
+    private StockManager sManager;
 
 
     // Constructor
@@ -44,9 +44,11 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
 
     @Nullable
     @Override
-    public ArrayList<StockHolder> loadInBackground()
+    public StockManager loadInBackground()
     {
+
         Log.d("auau", "loadinBK");
+        Map<String, ArrayList<StockHolder> > stockMap = new HashMap<>();
         ArrayList<StockHolder> stockData = new ArrayList<StockHolder>();
 
         try {
@@ -55,13 +57,19 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
             Log.d("auau Token", token);
 
             String jsonResult = GetData(token, API);
-            return GetStock(jsonResult);
+            stockData = GetStock(jsonResult);
+
+            sManager = new StockManager(stockData);
+            sManager.SortStock();
+            sManager.SetTop50();
+
+            return sManager;
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return stockData;
+        return null;
     }
 
     // Get the token
@@ -104,7 +112,7 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
             // Connect to api
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            //conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
             conn.getOutputStream().write(postDataBytes);
@@ -244,34 +252,51 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
 //            Log.d("Error", "Sever no data or no NetWork");
 //            return null;
 //        }
+
         String mResult = "";
-        ArrayList<StockHolder> resultStock = new ArrayList<StockHolder>();
+        ArrayList<StockHolder> resultStocks = new ArrayList<StockHolder>();
         try {
             JSONObject jobj = new JSONObject(_jsonArray);
             Log.d("all", _jsonArray);
 
             // Get String data of Stock
             JSONArray jData = jobj.getJSONArray("Data");
+            JSONArray jTitle = jobj.getJSONArray("Title");
+
+
             for (int i = 0; i < jData.length(); i++)
             {
-                JSONArray jStocks = jData.getJSONArray(i);
-                String sCode = jStocks.getString(0);    // 股票代號
-                String sName = jStocks.getString(1);    // 股票名稱
-                String sOpen = jStocks.getString(3);    // 開盤價
-                String sHigh = jStocks.getString(4);    // 最高價
-                String sLow = jStocks.getString(5);     // 最低
-                String sClose = jStocks.getString(6);   // 收盤
-                String sUpDown = jStocks.getString(7);  // 漲跌
-                String sUPDownP = jStocks.getString(8); // 漲幅(%)
+                JSONArray jStock = jData.getJSONArray(i);
+                String[] dataStrings = new String[jStock.length()];
 
-                String result = sCode + " " + sName + " " + sOpen + " "
-                                + sHigh + " " + sLow + " " + sClose;
-                Log.d("auau Result " , result);
+                for (int j = 0; j < jStock.length(); j++)
+                {
+                    dataStrings[j] = jStock.getString(j);
+                    if (i == 1)
+                    {
+                        Log.d("auau data info", j + " " + jStock.getString(j));
+                    }
+                }
+                resultStocks.add(new StockHolder(dataStrings));
+
+//                String sCode = jStocks.getString(0);    // 股票代號
+//                String sName = jStocks.getString(1);    // 股票名稱
+//                String sOpen = jStocks.getString(3);    // 開盤價
+//                String sHigh = jStocks.getString(4);    // 最高價
+//                String sLow = jStocks.getString(5);     // 最低
+//                String sClose = jStocks.getString(6);   // 收盤
+//                String sUpDown = jStocks.getString(7);  // 漲跌
+//                String sUPDownP = jStocks.getString(8); // 漲幅(%)
+//
+//                String result = sCode + " " + sName + " " + sOpen + " "
+//                                + sHigh + " " + sLow + " " + sClose;
+//                Log.d("auau Result " , result);
 
                 //resultStock.add(new StockHolder());
 
                 //Log.d("auau Stock " , jStocks.toString());
 
+//                String 切割法
 //                String temp = jStock.toString();
 //                String[] ary = temp.split(",");
 //                for (int j = 0; j < ary.length; j++)
@@ -288,6 +313,27 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
             e.printStackTrace();
         }
 
-        return resultStock;
+//        // sort by close
+//        Collections.sort(resultStocks, closeComparator);
+//
+//        for ( StockHolder sh : resultStocks )
+//        {
+//            Log.d("auau sort:", sh.GetCode() + ", price: " + sh.GetClose());
+//        }
+
+        return resultStocks;
     }
+
+//    private ArrayList<StockHolder> SortStock(ArrayList<StockHolder> _stocks, Comparator _comparator)
+//    {
+//        // sort by close
+//        Collections.sort(_stocks, _comparator);
+//
+//        for ( StockHolder sh : _stocks )
+//        {
+//            Log.d("auau sort:", sh.GetCode() + ", upDown percent: " + sh.GetUpDownP());
+//        }
+//        return _stocks;
+//    }
+
 }

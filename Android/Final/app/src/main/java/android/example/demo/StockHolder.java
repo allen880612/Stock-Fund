@@ -2,48 +2,123 @@ package android.example.demo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.function.ToDoubleFunction;
 
 public class StockHolder implements Serializable {
 
     private static final long serialVersionUID = 2333;
-    public StockHolder(String _code, String _name, String _price, String _date, String _type)
+
+    public StockHolder(String[] _data)
     {
-        code = _code;
-        name = _name;
-        price = _price;
-        date = _date;
-        type = _type;
-        action = Type2Action(_type);
+        code    = _data[0];
+        name    = _data[1];
+        date    = _data[2];
+        open    = _data[3];
+        high    = _data[4];
+        low     = _data[5];
+        close   = _data[6];
+        upDown  = _data[7];
+        upDownP = _data[8];
+        PER     = _data[19];
+        PER_4Season = _data[21];
+
     }
 
-    private String Type2Action(String _type)
-    {
-        switch(_type)
-        {
-            case "0":
-                return "做多買入";
-            case "1":
-                return "做空買入";
-            case "2":
-                return "做多平倉";
-            case "3":
-                return "做空平倉";
-            case "4":
-                return "止損賣出";
-            case "5":
-                return "持倉";
-            default:
-                return "不做操作";
-        }
+
+    public String GetCode() {
+        return code;
     }
 
-    public String name;
-    public String date;
-    public String code;
-    public String price;
-    public String type;
-    public String action;
+    public String GetName() {
+        return name;
+    }
 
-}
+    public String GetDate() {
+        return date;
+    }
+
+    public String GetOpen() {
+        return open;
+    }
+
+    public String GetHigh() {
+        return high;
+    }
+
+    public String GetLow() {
+        return low;
+    }
+
+    public String GetClose() {
+        return close;
+    }
+
+    public String GetUpDown() {
+        return upDown;
+    }
+
+    public String GetUpDownP() {
+        return upDownP;
+    }
+
+    public String GetPER() {
+        return PER;
+    }
+
+    public String GetPER_4S() {
+        return PER_4Season;
+    }
+
+    private String code;
+    private String name;
+    private String date;
+
+    private String open;
+    private String high;
+    private String low;
+    private String close;
+
+    private String upDown;
+    private String upDownP;
+
+    private String PER;
+    private String PER_4Season;
+
+    private float GetFloat(String _in)
+    {
+        if (_in.isEmpty())
+            return 0;
+
+        return Float.parseFloat(this.close);
+    }
+
+//    @Override
+//    public int compareTo(Object o)
+//    {
+//        StockHolder sh = (StockHolder) o;
+//
+//        int result = 0;
+//        float self, another;
+//
+//        // 防空字串
+//        self = GetFloat(this.close);
+//        another = GetFloat(sh.close);
+//
+//        //Log.d("auau compare", this.close + " vs " + sh.close);
+//
+//        // 大到小
+//        if (self > another)
+//            result = -1;
+//        else if(self < another)
+//            result = 1;
+//
+//        return result;
+//    }
+
+
+} //end of class

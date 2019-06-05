@@ -16,8 +16,8 @@ public class Description extends AppCompatActivity {
 
     public void Next(View view) {
         // Get data and continue pass
+        Intent intent = new Intent(Description.this, MainActivity.class);
         Bundle passBundle = getIntent().getExtras();
-        Intent intent = new Intent(Description.this, BackTesting.class);
         intent.putExtras(passBundle);
         startActivity(intent);
     }

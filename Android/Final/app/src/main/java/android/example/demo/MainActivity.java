@@ -51,15 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void SetRecycleView()
     {
-        ArrayList<StockHolder> stockList_1, stockList_2;
-        stockList_1 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_1");
-        stockList_2 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_2");
-        StockInfoAdapter adapter1 = new StockInfoAdapter(this, stockList_1);
-        StockInfoAdapter adapter2 = new StockInfoAdapter(this, stockList_2);
-        recyclerView_1.setAdapter(adapter1);
+        ArrayList<StockHolder> stockList;
+        stockList = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK");
+        StockInfoAdapter adapter = new StockInfoAdapter(this, stockList);
+        recyclerView_1.setAdapter(adapter);
         recyclerView_1.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView_2.setAdapter(adapter2);
-        recyclerView_2.setLayoutManager(new LinearLayoutManager(this));
+//        stockList_1 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_1");
+//        stockList_2 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_2");
+//        StockInfoAdapter adapter1 = new StockInfoAdapter(this, stockList_1);
+//        StockInfoAdapter adapter2 = new StockInfoAdapter(this, stockList_2);
+//        recyclerView_1.setAdapter(adapter1);
+//        recyclerView_1.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView_2.setAdapter(adapter2);
+//        recyclerView_2.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void SetDate()

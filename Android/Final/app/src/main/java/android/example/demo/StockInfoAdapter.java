@@ -79,11 +79,11 @@ public class StockInfoAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull StockViewHolder holder, int _p) {
-        StockHolder sh = stockList.get(_p);
-        holder.nameView.setText(sh.name);  //ge position and do something
-        holder.codeView.setText(sh.code);
-        holder.priceView.setText(sh.price);
-        //holder.actionView.setText(sh.action);
+        StockHolder sh = stockList.get(_p);     //ge position and do something
+        holder.nameView.setText(sh.GetName());
+        holder.codeView.setText(sh.GetCode());
+        holder.priceView.setText(sh.GetClose());
+
 
     }
 
