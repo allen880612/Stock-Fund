@@ -88,16 +88,18 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
             // Build the URL
             URL url = new URL(TOKEN_URL);
             // Build the URL
-            StringBuilder postData = new StringBuilder();
-            postData.append(URLEncoder.encode("appId", "UTF-8"));
-            postData.append('=');
-            postData.append(URLEncoder.encode(appid, "UTF-8"));
-            postData.append('&');
-            postData.append(URLEncoder.encode("appSecret", "UTF-8"));
-            postData.append('=');
-            postData.append(URLEncoder.encode(appsecret, "UTF-8"));
-
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+//            // use this method to build map to URL!
+//            StringBuilder postData = new StringBuilder();
+//            postData.append(URLEncoder.encode("appId", "UTF-8"));
+//            postData.append('=');
+//            postData.append(URLEncoder.encode(appid, "UTF-8"));
+//            postData.append('&');
+//            postData.append(URLEncoder.encode("appSecret", "UTF-8"));
+//            postData.append('=');
+//            postData.append(URLEncoder.encode(appsecret, "UTF-8"));
+//
+//            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            byte[] postDataBytes = token_params.getBytes("UTF-8");
 
             // Connect to api
             conn = (HttpURLConnection) url.openConnection();
@@ -186,7 +188,8 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
         try {
             URL url = new URL(DATA_URL + _api);
 //            String userCredentials = "username:password";
-            String basicAuth = "Bearer " + (URLEncoder.encode(_token, "UTF-8"));
+            //String basicAuth = "Bearer " + (URLEncoder.encode(_token, "UTF-8"));
+            String basicAuth = "Bearer " + _token;
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Authorization", basicAuth);
@@ -246,47 +249,38 @@ public class StockLoader extends AsyncTaskLoader< ArrayList<StockHolder> >
         try {
             JSONObject jobj = new JSONObject(_jsonArray);
             Log.d("all", _jsonArray);
-//            String title = jobj.getString("Title");
-//            JSONArray data = jobj.getJSONArray("Data");
-//            String date = jobj.getString("Date");
 
-//            for (int i = 0; i < data.length(); ++i)
-//            {
-//                try {
-//                    JSONObject jdata = data.getJSONObject(i);
-//                    String mCode = jdata.getString("code");
-//                    String mType = jdata.getString("type");
-//                    String mDate = jdata.getString("date");
-//                    String mName = jdata.getString("name");
-//                    String mPrice = jdata.getString("price");
-//
-//                    mResult += mCode + " " + mName + " 收盤價：" + mPrice + "\n";
-//                    Log.d("stockData", mResult + " date:" +  mDate);
-//                    // Check stock had existed in array
-//                    Boolean isExisted = false;
-//                    Boolean isToday = true;
-//
-//                    if (!mDate.equals(GetDate()))
-//                        isToday = false;
-//
-//                    for (StockHolder sh : resultStock)
-//                    {
-//                        Log.d("Existed?",  mCode + " = " + sh.code);
-//                        if (mCode.equals(sh.code))
-//                        {
-//                            isExisted = true;
-//                        }
-//                    }
-//                    if (!isExisted && isToday)
-//                        resultStock.add(new StockHolder(mCode, mName, mPrice, mDate, mType));
-//
-//                    Log.d("run", "GetStock");
-//                }
-//                catch (JSONException e)
+            // Get String data of Stock
+            JSONArray jData = jobj.getJSONArray("Data");
+            for (int i = 0; i < jData.length(); i++)
+            {
+                JSONArray jStocks = jData.getJSONArray(i);
+                String sCode = jStocks.getString(0);    // 股票代號
+                String sName = jStocks.getString(1);    // 股票名稱
+                String sOpen = jStocks.getString(3);    // 開盤價
+                String sHigh = jStocks.getString(4);    // 最高價
+                String sLow = jStocks.getString(5);     // 最低
+                String sClose = jStocks.getString(6);   // 收盤
+                String sUpDown = jStocks.getString(7);  // 漲跌
+                String sUPDownP = jStocks.getString(8); // 漲幅(%)
+
+                String result = sCode + " " + sName + " " + sOpen + " "
+                                + sHigh + " " + sLow + " " + sClose;
+                Log.d("auau Result " , result);
+
+                //resultStock.add(new StockHolder());
+
+                //Log.d("auau Stock " , jStocks.toString());
+
+//                String temp = jStock.toString();
+//                String[] ary = temp.split(",");
+//                for (int j = 0; j < ary.length; j++)
 //                {
-//                    e.printStackTrace();
+//
+//                    Log.d("auau String ", ary[j]);
 //                }
-//            }
+
+            }
         }
         catch (JSONException e)
         {
