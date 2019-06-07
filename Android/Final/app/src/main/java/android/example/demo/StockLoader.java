@@ -1,6 +1,7 @@
 package android.example.demo;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
@@ -29,11 +30,15 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
     private final String TOKEN_URL = "https://owl.cmoney.com.tw/OwlApi/auth";
     private StockManager sManager;
 
+    private String stockCode[];
 
     // Constructor
     public StockLoader(@NonNull Context context, String _api) {
         super(context);
         API = _api;
+        //stockCode = _stockCode;
+        //jsonData = _jsonData;
+
     }
 
     @Override
@@ -261,7 +266,8 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
 
             // Get String data of Stock
             JSONArray jData = jobj.getJSONArray("Data");
-            JSONArray jTitle = jobj.getJSONArray("Title");
+//            JSONArray jTitle = jobj.getJSONArray("Title");
+
 
 
             for (int i = 0; i < jData.length(); i++)

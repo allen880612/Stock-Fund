@@ -29,6 +29,41 @@ public class StockHolder implements Serializable {
 
     }
 
+    public String GetValueByKey(String _key)
+    {
+        switch(_key)
+        {
+            case "CODE":
+                return code;
+
+            case "OPEN":
+                return open;
+
+            case "CLOSE":
+                return close;
+
+            case "HIGH":
+                return high;
+
+            case "LOW":
+                return low;
+
+            case "UP_DOWN":
+                return upDown;
+
+            case "UP_DOWN_PERCENT":
+                return upDownP;
+
+            case "PER":
+                return PER;
+
+            case "PER_4S":
+                return PER_4Season;
+
+            default:
+                return "Key Error!";
+        }
+    }
 
     public String GetCode() {
         return code;

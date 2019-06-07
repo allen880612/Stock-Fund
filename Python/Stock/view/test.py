@@ -46,10 +46,36 @@ def getStock(_signal):
     print("Title : ", data["Title"])
     for arg in args:
         print(arg)
-            
+
+def GetStocks( _code):
+    datestr = "20190606"
+    r = requests.post("http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + datestr + "&stockNo=" +_code)
+    print (r)
+    data = json.loads(r.text)
+    print(data)
+
+def ReadCodes():
+    stocks = pd.read_csv("stock.csv")
+    codes = []
+    for i in range( len(stocks["股票代號"]) ):
+        code_str = str(stocks.loc[i, "股票代號"])
+        codes.append(code_str);
         
+    return codes;
+
+GetStocks("1101")
+
+'''
+codes = ReadCodes()
+for code in codes:
+    GetStocks(code)
+    time.sleep(5)
+'''    
+    
+'''        
 #持倉是三小，先不做
 for i in range(5):
     getStock(i)
     print("-------------------")
+'''
 

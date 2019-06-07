@@ -107,12 +107,12 @@ public class PHPAsyncTask extends
     @Override
     protected void onPostExecute(Map<String, ArrayList< StockHolder >> _result) {
 
-        StockInfoAdapter adapter1 = new StockInfoAdapter(mContext.get(), _result.get("s1"));
-        StockInfoAdapter adapter2 = new StockInfoAdapter(mContext.get(), _result.get("s2"));
-        recycleView_1.get().setAdapter(adapter1);
-        recycleView_1.get().setLayoutManager(new LinearLayoutManager(mContext.get()));
-        recycleView_2.get().setAdapter(adapter2);
-        recycleView_2.get().setLayoutManager(new LinearLayoutManager(mContext.get()));
+//        StockInfoAdapter adapter1 = new StockInfoAdapter(mContext.get(), _result.get("s1"));
+//        StockInfoAdapter adapter2 = new StockInfoAdapter(mContext.get(), _result.get("s2"));
+//        recycleView_1.get().setAdapter(adapter1);
+//        recycleView_1.get().setLayoutManager(new LinearLayoutManager(mContext.get()));
+//        recycleView_2.get().setAdapter(adapter2);
+//        recycleView_2.get().setLayoutManager(new LinearLayoutManager(mContext.get()));
 
         progressBar.get().setVisibility(View.GONE);
         tv_date.get().setVisibility(View.VISIBLE);

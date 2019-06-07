@@ -17,6 +17,7 @@ public class StockInfoAdapter extends
     private final ArrayList<StockHolder> stockList;
     private LayoutInflater mInflater;
     private Context mContext;
+    private String choice;
 
     // describe view holder
     class StockViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -58,10 +59,12 @@ public class StockInfoAdapter extends
             //mAdapter.notifyDataSetChanged();
         }
     }
+
     //Constructor
-    public StockInfoAdapter(Context context,ArrayList<StockHolder> _stockList) {
+    public StockInfoAdapter(Context context,ArrayList<StockHolder> _stockList, String _choice) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
+        choice = _choice;
         this.stockList = _stockList;
     }
 
@@ -82,9 +85,9 @@ public class StockInfoAdapter extends
         StockHolder sh = stockList.get(_p);     //ge position and do something
         holder.nameView.setText(sh.GetName());
         holder.codeView.setText(sh.GetCode());
-        holder.priceView.setText(sh.GetClose());
 
-
+        String info = sh.GetValueByKey(choice);
+        holder.priceView.setText(info);
     }
 
 }

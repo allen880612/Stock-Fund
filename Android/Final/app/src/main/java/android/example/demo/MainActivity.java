@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tv_stock1, tv_stock2, tv_date;
+    private TextView tv_stock1, tv_stock2, tv_date, label_top;
     private RecyclerView recyclerView_1, recyclerView_2;
     private String mURL;
     private ProgressBar progressBar;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         Initialize();
         SetRecycleView();
+
     }
 
     void Initialize()
@@ -44,18 +45,35 @@ public class MainActivity extends AppCompatActivity {
         recyclerView_2 = findViewById(R.id.recycleView_2);
         tv_date = findViewById(R.id.tv_date);
         progressBar = findViewById(R.id.progressBar);
+        label_top = findViewById(R.id.label_buy1);
+
         progressBar.setVisibility(View.INVISIBLE);
         SetDate();
+
+        String top_text = getIntent().getExtras().getString("CHOICE_TEXT", "錯誤");
+        label_top.setText(top_text);
+
         //AsyncTask task = new PHPAsyncTask(this, recyclerView_1, recyclerView_2).execute(mURL);
     }
 
     private void SetRecycleView()
     {
-        ArrayList<StockHolder> stockList;
-        stockList = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK");
-        StockInfoAdapter adapter = new StockInfoAdapter(this, stockList);
-        recyclerView_1.setAdapter(adapter);
-        recyclerView_1.setLayoutManager(new LinearLayoutManager(this));
+        ArrayList<StockHolder> stockList = null;
+        String choice = "";
+
+        if ( getIntent().getExtras()!= null)
+        {
+            stockList = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK");
+            choice = getIntent().getExtras().getString("CHOICE", "CLOSE");
+        }
+
+        if (stockList != null)
+        {
+            StockInfoAdapter adapter = new StockInfoAdapter(this, stockList, choice);
+            recyclerView_1.setAdapter(adapter);
+            recyclerView_1.setLayoutManager(new LinearLayoutManager(this));
+        }
+
 //        stockList_1 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_1");
 //        stockList_2 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_2");
 //        StockInfoAdapter adapter1 = new StockInfoAdapter(this, stockList_1);

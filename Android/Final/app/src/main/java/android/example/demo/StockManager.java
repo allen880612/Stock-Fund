@@ -12,6 +12,15 @@ import java.util.Map;
 
 public class StockManager implements Serializable{
 
+    private final String OPEN = "OPEN";
+    private final String CLOSE = "CLOSE";
+    private final String HIGH = "HIGH";
+    private final String LOW = "LOW";
+    private final String UP_DOWN = "UP_DOWN";
+    private final String UP_DOWN_PERCENT = "UP_DOWN_PERCENT";
+    private final String PER = "PER";
+    private final String PER_4S = "PER_4S";
+
     public StockManager()
     {
         stock_map = new HashMap<>();
@@ -28,11 +37,11 @@ public class StockManager implements Serializable{
 
     public void SortStock()
     {
-        AddStocktoMap("close", SortByClose());     // sort by close price
-        AddStocktoMap("upDown", SortByUpDown());   // sort by up down price
-        AddStocktoMap("upDownP", SortByUpDownP()); // sort by up down percent
-        AddStocktoMap("PER", SortByPER());         // sort by up down percent
-        AddStocktoMap("PER_4S", SortByPER_4S());   // sort by up down percent
+        AddStocktoMap(CLOSE, SortByClose());     // sort by close price
+        AddStocktoMap(UP_DOWN, SortByUpDown());   // sort by up down price
+        AddStocktoMap(UP_DOWN_PERCENT, SortByUpDownP()); // sort by up down percent
+        AddStocktoMap(PER, SortByPER());         // sort by up down percent
+        AddStocktoMap(PER_4S, SortByPER_4S());   // sort by up down percent
     }
 
     public ArrayList<StockHolder> SortByClose()
@@ -41,8 +50,8 @@ public class StockManager implements Serializable{
         ArrayList<StockHolder> sort =  (ArrayList<StockHolder>) stock_data.clone();
         Collections.sort(sort, closeComparator);
 
-        for ( StockHolder sh : sort )
-            Log.d("auau sort:", sh.GetCode() + ", Close Price : " + sh.GetClose());
+//        for ( StockHolder sh : sort )
+//            Log.d("auau sort:", sh.GetCode() + ", Close Price : " + sh.GetClose());
 
         return sort;
     }
@@ -74,8 +83,8 @@ public class StockManager implements Serializable{
         ArrayList<StockHolder> sort = (ArrayList<StockHolder>) stock_data.clone();
         Collections.sort(sort, PER_Comparator);
 
-//        for ( StockHolder sh : sort )
-//            Log.d("auau sort:", sh.GetCode() + ", PER : " + sh.GetPER());
+        for ( StockHolder sh : sort )
+            Log.d("auau sort:", sh.GetCode() + ", PER : " + sh.GetPER());
 
         return sort;
     }
@@ -237,14 +246,15 @@ public class StockManager implements Serializable{
             StockHolder sh1 = (StockHolder) o1;
             StockHolder sh2 = (StockHolder) o2;
 
-            float n1 =  sh1.GetPER().isEmpty() ? 0 : (Float.valueOf(sh1.GetPER()));   // 防空字串
-            float n2 =  sh2.GetPER().isEmpty() ? 0 : (Float.valueOf(sh2.GetPER()));   // 防空字串
+            float n1 =  sh1.GetPER().isEmpty() ? 21487 : (Float.valueOf(sh1.GetPER()));   // 防空字串
+            float n2 =  sh2.GetPER().isEmpty() ? 21487 : (Float.valueOf(sh2.GetPER()));   // 防空字串
+
 
             // Small to Big (up to)
-            if (n1 > n2)
-                return 1;
-            else if(n1 < n2)
+            if (n1 < n2)
                 return -1;
+            else if (n1 > n2)
+                return 1;
             return 0;
         }
     };
@@ -258,14 +268,14 @@ public class StockManager implements Serializable{
             StockHolder sh1 = (StockHolder) o1;
             StockHolder sh2 = (StockHolder) o2;
 
-            float n1 =  sh1.GetPER_4S().isEmpty() ? 0 : (Float.valueOf(sh1.GetPER_4S()));   // 防空字串
-            float n2 =  sh2.GetPER_4S().isEmpty() ? 0 : (Float.valueOf(sh2.GetPER_4S()));   // 防空字串
+            float n1 =  sh1.GetPER_4S().isEmpty() ? 214878 : (Float.valueOf(sh1.GetPER_4S()));   // 防空字串
+            float n2 =  sh2.GetPER_4S().isEmpty() ? 214878 : (Float.valueOf(sh2.GetPER_4S()));   // 防空字串
 
             // Small to Big (up to)
-            if (n1 > n2)
-                return 1;
-            else if(n1 < n2)
+            if (n1 < n2)
                 return -1;
+            else if (n1 > n2)
+                return 1;
             return 0;
         }
     };
