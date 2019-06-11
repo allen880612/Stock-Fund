@@ -37,11 +37,14 @@ public class StockManager implements Serializable{
 
     public void SortStock()
     {
-        AddStocktoMap(CLOSE, SortByClose());     // sort by close price
-        AddStocktoMap(UP_DOWN, SortByUpDown());   // sort by up down price
-        AddStocktoMap(UP_DOWN_PERCENT, SortByUpDownP()); // sort by up down percent
-        AddStocktoMap(PER, SortByPER());         // sort by up down percent
-        AddStocktoMap(PER_4S, SortByPER_4S());   // sort by up down percent
+        AddStocktoMap(CLOSE, SortByClose());                // sort by close price
+        AddStocktoMap(OPEN, SortByOpen());                // sort by close price
+        AddStocktoMap(HIGH, SortByHigh());                // sort by close price
+        AddStocktoMap(LOW, SortByLow());                // sort by close price
+        AddStocktoMap(UP_DOWN, SortByUpDown());             // sort by up down price
+        AddStocktoMap(UP_DOWN_PERCENT, SortByUpDownP());    // sort by up down percent
+        AddStocktoMap(PER, SortByPER());                    // sort by PER
+        AddStocktoMap(PER_4S, SortByPER_4S());              // sort by PER 4 season
     }
 
     public ArrayList<StockHolder> SortByClose()
@@ -52,6 +55,39 @@ public class StockManager implements Serializable{
 
 //        for ( StockHolder sh : sort )
 //            Log.d("auau sort:", sh.GetCode() + ", Close Price : " + sh.GetClose());
+
+        return sort;
+    }
+
+    public ArrayList<StockHolder> SortByOpen()
+    {
+        ArrayList<StockHolder> sort =  (ArrayList<StockHolder>) stock_data.clone();
+        Collections.sort(sort, openComparator);
+
+//        for ( StockHolder sh : sort )
+//            Log.d("auau sort:", sh.GetCode() + ", Close Price : " + sh.GetClose());
+
+        return sort;
+    }
+
+    public ArrayList<StockHolder> SortByHigh()
+    {
+        ArrayList<StockHolder> sort =  (ArrayList<StockHolder>) stock_data.clone();
+        Collections.sort(sort, highComparator);
+
+//        for ( StockHolder sh : sort )
+//            Log.d("auau sort:", sh.GetCode() + ", High Price : " + sh.GetHigh());
+
+        return sort;
+    }
+
+    public ArrayList<StockHolder> SortByLow()
+    {
+        ArrayList<StockHolder> sort =  (ArrayList<StockHolder>) stock_data.clone();
+        Collections.sort(sort, lowComparator);
+
+//        for ( StockHolder sh : sort )
+//            Log.d("auau sort:", sh.GetCode() + ", Low Price : " + sh.GetLow());
 
         return sort;
     }
@@ -83,8 +119,8 @@ public class StockManager implements Serializable{
         ArrayList<StockHolder> sort = (ArrayList<StockHolder>) stock_data.clone();
         Collections.sort(sort, PER_Comparator);
 
-        for ( StockHolder sh : sort )
-            Log.d("auau sort:", sh.GetCode() + ", PER : " + sh.GetPER());
+//        for ( StockHolder sh : sort )
+//            Log.d("auau sort:", sh.GetCode() + ", PER : " + sh.GetPER());
 
         return sort;
     }
@@ -179,6 +215,69 @@ public class StockManager implements Serializable{
 
             float n1 =  sh1.GetClose().isEmpty() ? 0 : (Float.valueOf(sh1.GetClose()));   // 防空字串
             float n2 =  sh2.GetClose().isEmpty() ? 0 : (Float.valueOf(sh2.GetClose()));   // 防空字串
+
+            // Big to small (down to)
+            if (n1 > n2)
+                return -1;
+            else if(n1 < n2)
+                return 1;
+            return 0;
+        }
+    };
+
+    // compare with open price (down to)
+    public static Comparator openComparator = new Comparator()
+    {
+        @Override
+        public int compare(Object o1, Object o2)
+        {
+            StockHolder sh1 = (StockHolder) o1;
+            StockHolder sh2 = (StockHolder) o2;
+
+            float n1 =  sh1.GetOpen().isEmpty() ? 0 : (Float.valueOf(sh1.GetOpen()));   // 防空字串
+            float n2 =  sh2.GetOpen().isEmpty() ? 0 : (Float.valueOf(sh2.GetOpen()));   // 防空字串
+
+            // Big to small (down to)
+            if (n1 > n2)
+                return -1;
+            else if(n1 < n2)
+                return 1;
+            return 0;
+        }
+    };
+
+    // compare with high price (down to)
+    public static Comparator highComparator = new Comparator()
+    {
+        @Override
+        public int compare(Object o1, Object o2)
+        {
+            StockHolder sh1 = (StockHolder) o1;
+            StockHolder sh2 = (StockHolder) o2;
+
+            float n1 =  sh1.GetHigh().isEmpty() ? 0 : (Float.valueOf(sh1.GetHigh()));   // 防空字串
+            float n2 =  sh2.GetHigh().isEmpty() ? 0 : (Float.valueOf(sh2.GetHigh()));   // 防空字串
+
+            // Big to small (down to)
+            if (n1 > n2)
+                return -1;
+            else if(n1 < n2)
+                return 1;
+            return 0;
+        }
+    };
+
+    // compare with low price (down to)
+    public static Comparator lowComparator = new Comparator()
+    {
+        @Override
+        public int compare(Object o1, Object o2)
+        {
+            StockHolder sh1 = (StockHolder) o1;
+            StockHolder sh2 = (StockHolder) o2;
+
+            float n1 =  sh1.GetLow().isEmpty() ? 0 : (Float.valueOf(sh1.GetLow()));   // 防空字串
+            float n2 =  sh2.GetLow().isEmpty() ? 0 : (Float.valueOf(sh2.GetLow()));   // 防空字串
 
             // Big to small (down to)
             if (n1 > n2)

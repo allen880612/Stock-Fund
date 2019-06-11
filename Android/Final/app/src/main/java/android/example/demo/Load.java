@@ -35,7 +35,7 @@ public class Load extends AppCompatActivity
     private Button btn_start;
     private Spinner spr_choice;
 
-    private static boolean isLoading = true;
+    private static boolean isLoaded = false;
     private String choice, choice_key;
 
     private Intent mIntent;
@@ -49,6 +49,7 @@ public class Load extends AppCompatActivity
 
         Initialize();
         SetSpinnerListener();
+        LoadStocks();
 
     }
 
@@ -69,17 +70,6 @@ public class Load extends AppCompatActivity
                 R.layout.spinner_item);
 
         spr_choice.setAdapter(choiceAdapter);
-
-//        Bundle queryBundle = new Bundle();
-//        String API = "BABA0010-14663b";
-////        queryBundle.putString(URL, API);
-////        LoaderManager.getInstance(this).restartLoader(0, queryBundle, this);
-
-        if(LoaderManager.getInstance(this).getLoader(0) == null)
-        {
-            LoaderManager.getInstance(this).initLoader(0,null,this);
-        }
-
     }
 
     void SetSpinnerListener() {
@@ -102,28 +92,40 @@ public class Load extends AppCompatActivity
         });
     }
 
-    public void Start(View view) {
-        if (!isLoading)
-        {
-            mIntent = new Intent(this, Description.class);
-            Bundle mBundle = new Bundle();
+    void LoadStocks()
+    {
+        //        Bundle queryBundle = new Bundle();
+//        String API = "BABA0010-14663b";
+////        queryBundle.putString(URL, API);
+////        LoaderManager.getInstance(this).restartLoader(0, queryBundle, this);
+//        if(LoaderManager.getInstance(this).getLoader(0) == null)
+//        {
+//            LoaderManager.getInstance(this).initLoader(0,null,this);
+//        }
+        LoaderManager.getInstance(this).initLoader(0,null,this);
+    }
 
-            ArrayList<StockHolder> choice_stock = sManager.GetTop50().get(choice_key);
-            //ArrayList<StockHolder> choice_stock = sManager.GetArrayList("close");
+    public void Start(View view) {
+
+        mIntent = new Intent(this, Description.class);
+        Bundle mBundle = new Bundle();
+
+        ArrayList<StockHolder> choice_stock = sManager.GetTop50().get(choice_key);
+        //ArrayList<StockHolder> choice_stock = sManager.GetArrayList("close");
 
 //        for (StockHolder sh : choice_stock)
 //        {
 //            Log.d("auau choice", sh.GetCode() + " Close Price : " + sh.GetClose());
 //        }
 
-            mBundle.putSerializable(STOCK, (Serializable) choice_stock);
-            mBundle.putString(CHOICE, choice_key);
-            mBundle.putString(CHOICE_TEXT, choice);
+        mBundle.putSerializable(STOCK, (Serializable) choice_stock);
+        mBundle.putString(CHOICE, choice_key);
+        mBundle.putString(CHOICE_TEXT, choice);
 
-            mIntent.putExtras(mBundle);
-            startActivity(mIntent);
-            Log.d("auau", "not in Loading ");
-        }
+        mIntent.putExtras(mBundle);
+        startActivity(mIntent);
+        Log.d("auau", "not in Loading ");
+
     }
 
     @NonNull
@@ -142,7 +144,7 @@ public class Load extends AppCompatActivity
     public void onLoadFinished(@NonNull Loader< StockManager > loader, StockManager _sManager) {
         Log.d("auau", "Finish Load");
         sManager = _sManager;
-        isLoading = false;
+        isLoaded = false;
 
         label_menu.setText(getString(R.string.label_finish));
         btn_start.setVisibility(View.VISIBLE);
