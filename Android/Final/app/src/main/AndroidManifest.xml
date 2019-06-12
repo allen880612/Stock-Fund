@@ -16,7 +16,7 @@
             android:parentActivityName=".Description"></activity>
         <activity
             android:name=".Description"
-            android:parentActivityName=".Load" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".Load" />

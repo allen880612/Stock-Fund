@@ -8,47 +8,269 @@
     android:orientation="vertical"
     tools:context=".Description">
 
-    <TextView
-        android:id="@+id/label_tool"
-        style="@style/Label"
-        android:text="@string/label_tool" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tool_description"
-        style="@style/description"
-        android:text="@string/description_tool" />
+        <TextView
+            android:id="@+id/label_name"
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_company_name" />
+
+        <TextView
+            android:id="@+id/label_code"
+            style="@style/Label"
+            android:paddingLeft="20dp"
+            android:text="@string/label_code" />
+
+    </LinearLayout>
+
+    <!-- label company info -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_mk_value"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="市值" />
+
+        <TextView
+            android:id="@+id/label_mk_valueP"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="市值(%)" />
+
+        <TextView
+            android:id="@+id/goban"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="股本" />
+
+        <TextView
+            android:id="@+id/label_turnover"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="周轉率(%)" />
+    </LinearLayout>
+    <!-- value company info -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/value_mk_value"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_mk_valueP"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_goban"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_turnover"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/label_strategy"
         style="@style/Label"
-        android:text="@string/label_strategy" />
+        android:text="@string/label_info" />
 
-    <TextView
-        android:id="@+id/label_case1"
-        style="@style/Label_small"
-        android:text="@string/label_case1" />
+    <!-- label Price -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/case1"
-        style="@style/description"
-        android:text="@string/case1" />
+        <TextView
+            android:id="@+id/label_open"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="開盤價" />
 
-    <TextView
-        android:id="@+id/label_case2"
-        style="@style/Label_small"
-        android:text="@string/label_case2" />
+        <TextView
+            android:id="@+id/label_high"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="最高價" />
 
-    <TextView
-        android:id="@+id/case2"
-        style="@style/description"
-        android:text="@string/case2" />
+        <TextView
+            android:id="@+id/label_low"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="最低價" />
+
+        <TextView
+            android:id="@+id/label_close"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="收盤價" />
+    </LinearLayout>
+    <!-- value Price -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/value_open"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_high"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_low"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_close"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+    </LinearLayout>
+
+    <!-- label PER & volume -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_PER"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="本益比" />
+
+        <TextView
+            android:id="@+id/label_PER_4S"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="本益比\n(4季)" />
+
+        <TextView
+            android:id="@+id/label_deal_num"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="成交筆數" />
+
+        <TextView
+            android:id="@+id/label_deal_price"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="成交金額(千)" />
+
+    </LinearLayout>
+    <!-- value PER & volume -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/value_PER"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_PER_4S"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_deal_num"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_deal_price"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+    </LinearLayout>
+
+    <!-- label upDown -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_upDown"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="漲幅" />
+
+        <TextView
+            android:id="@+id/label_upDownP"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="漲幅(%)" />
+
+        <TextView
+            android:id="@+id/label_amplitude"
+            style="@style/Label_horizontal"
+            android:layout_weight="1"
+            android:text="振幅(%)" />
+
+    </LinearLayout>
+    <!-- value upDown -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/value_upDown"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_upDownP"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/value_amplitude"
+            style="@style/value_horizontal"
+            android:text="@string/zero" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"
         style="@style/Button"
-        android:onClick="Next"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button_style"
-        android:text="了解" />
+        android:onClick="Next"
+        android:text="返回" />
 </LinearLayout>

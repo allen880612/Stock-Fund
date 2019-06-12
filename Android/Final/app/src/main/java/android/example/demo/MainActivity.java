@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_stock1, tv_stock2, tv_date, label_top;
     private RecyclerView recyclerView_1, recyclerView_2;
     private String mURL;
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +42,13 @@ public class MainActivity extends AppCompatActivity {
         mURL = "http://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
         //mURL = "https://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
         recyclerView_1 = findViewById(R.id.recycleView_1);
-        recyclerView_2 = findViewById(R.id.recycleView_2);
-        tv_date = findViewById(R.id.tv_date);
-        progressBar = findViewById(R.id.progressBar);
+        //recyclerView_2 = findViewById(R.id.recycleView_2);
+        //tv_date = findViewById(R.id.tv_date);
+        //progressBar = findViewById(R.id.progressBar);
         label_top = findViewById(R.id.label_buy1);
 
-        progressBar.setVisibility(View.INVISIBLE);
+        //progressBar.setVisibility(View.INVISIBLE);
         SetDate();
-
-        String top_text = getIntent().getExtras().getString("CHOICE_TEXT", "錯誤");
-        label_top.setText(top_text);
 
         //AsyncTask task = new PHPAsyncTask(this, recyclerView_1, recyclerView_2).execute(mURL);
     }
@@ -63,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         if ( getIntent().getExtras()!= null)
         {
+            String top_text = getIntent().getExtras().getString("CHOICE_TEXT", "錯誤");
+            label_top.setText(top_text);
             stockList = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK");
             choice = getIntent().getExtras().getString("CHOICE", "CLOSE");
         }
@@ -99,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
         date += String.valueOf(month) + "/" + String.valueOf(day);
 
         Log.d("Date", date);
-        tv_date.setText( getResources().getText(R.string.default_label_date) + date);
+        //tv_date.setText( getResources().getText(R.string.default_label_date) + date);
     }
 
-    public void Refresh(View view) {
-        SetDate();
-
-        new PHPAsyncTask(this, recyclerView_1, recyclerView_2, progressBar, tv_date, (Button)view).execute(mURL);
-    }
+//    public void Refresh(View view) {
+//        SetDate();
+//
+//        new PHPAsyncTask(this, recyclerView_1, recyclerView_2, progressBar, tv_date, (Button)view).execute(mURL);
+//    }
 
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,8 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
+
+
 
 public class Load extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks< StockManager > {
@@ -45,6 +48,14 @@ public class Load extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState == null) {
+            // Set the local night mode to some value
+            getDelegate().setLocalNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+            // 调用 recreate() 使设置生效
+            recreate();
+        }
         setContentView(R.layout.activity_load);
 
         Initialize();
@@ -107,7 +118,7 @@ public class Load extends AppCompatActivity
 
     public void Start(View view) {
 
-        mIntent = new Intent(this, Description.class);
+        mIntent = new Intent(this, MainActivity.class);
         Bundle mBundle = new Bundle();
 
         ArrayList<StockHolder> choice_stock = sManager.GetTop50().get(choice_key);
@@ -134,7 +145,7 @@ public class Load extends AppCompatActivity
         Log.d("auau", "Start Load");
         String API = "BABA0010-14663b";
 
-        String[] stockCode = getResources().getStringArray(R.array.list_stock_code);
+        //String[] stockCode = getResources().getStringArray(R.array.list_stock_code);
         //String stockData = getResources().getString(R.string.stock_data_json);
 
         return new StockLoader(this, API);

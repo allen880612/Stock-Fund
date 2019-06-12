@@ -1,27 +1,4 @@
-﻿#pragma region - UIManager -
-	class UIManager
-	{
-	public:
-		UIManager();
-		~UIManager();
-
-		void Load();
-		void Initialize();
-		void Clear();
-
-		void UpdateState(CPoint);
-		void OnCycle();
-		//void ShowButton();
-
-	private:
-		int left_time;	// Game left time
-		int point;		// Usless kill passerby point
-		int hp, EQ;		// Role info
-	};
-#pragma endregion
-
-
-"股票代號",
+﻿"股票代號",
 "股票名稱",
 "日期",
 "開盤價",

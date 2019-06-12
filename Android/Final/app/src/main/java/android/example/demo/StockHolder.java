@@ -15,17 +15,26 @@ public class StockHolder implements Serializable {
 
     public StockHolder(String[] _data)
     {
-        code    = _data[0];
-        name    = _data[1];
-        date    = _data[2];
-        open    = _data[3];
-        high    = _data[4];
-        low     = _data[5];
-        close   = _data[6];
-        upDown  = _data[7];
-        upDownP = _data[8];
-        PER     = _data[19];
+        code        = _data[0];
+        name        = _data[1];
+        date        = _data[2];
+        open        = _data[3];
+        high        = _data[4];
+        low         = _data[5];
+        close       = _data[6];
+        upDown      = _data[7];
+        upDownP     = _data[8];
+        amplitude   = _data[9];
+        volume_num  = _data[10];
+        deal_num    = _data[11];
+        deal_price  = _data[12];
+        goban       = _data[16];
+        mk_value    = _data[17];
+        mk_percent  = _data[18];
+        PER         = _data[19];
+        PBR         = _data[20];
         PER_4Season = _data[21];
+        turnover    = _data[22];
 
     }
 
@@ -109,20 +118,63 @@ public class StockHolder implements Serializable {
         return PER_4Season;
     }
 
+    public String GetVolume_num() {
+        return volume_num;
+    }
+
+    public String GetTurnover() {
+        return turnover;
+    }
+
+    public String GetAmplitude() {
+        return amplitude;
+    }
+
+    public String GetDeal_num() {
+        return deal_num;
+    }
+
+    public String GetDeal_price() {
+        return deal_price;
+    }
+
+    public String GetGoban() {
+        return goban;
+    }
+
+    public String GetMk_value() {
+        return mk_value;
+    }
+
+    public String GetMk_percent() {
+        return mk_percent;
+    }
+
+    public String GetPBR() {
+        return PBR;
+    }
+
     private String code;
     private String name;
     private String date;
-
     private String open;
     private String high;
     private String low;
     private String close;
-
     private String upDown;
     private String upDownP;
-
     private String PER;
     private String PER_4Season;
+    private String amplitude;   // 震幅(%)
+    private String volume_num;  // 成交量
+    private String deal_num;    // 成交筆數
+    private String deal_price;  // 成交金額(千)
+    private String goban;       // 股本
+    private String mk_value;    // 市值
+    private String mk_percent;  // 市值
+    private String PBR;         // 淨值比
+    private String turnover;    // 周轉率
+
 
     private float GetFloat(String _in)
     {
