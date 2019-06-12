@@ -85,14 +85,14 @@ public class Description extends AppCompatActivity {
         high.setText(sh.GetHigh());
         low.setText(sh.GetLow());
         updown.setText(sh.GetUpDown());
-        updownP.setText(sh.GetUpDown());
-        amplitude.setText(sh.GetAmplitude());
+        updownP.setText(sh.GetUpDown() + "%");
+        amplitude.setText(sh.GetAmplitude() + "%");
 
         goban.setText(sh.GetGoban());
 
         mk_value.setText(sh.GetMk_value());
-        mk_percent.setText(sh.GetMk_percent());
-        turnover.setText(sh.GetTurnover());
+        mk_percent.setText(sh.GetMk_percent() + "%");
+        turnover.setText(sh.GetTurnover() + "%");
 
         deal_num.setText(sh.GetDeal_num());
         deal_price.setText(sh.GetDeal_price());

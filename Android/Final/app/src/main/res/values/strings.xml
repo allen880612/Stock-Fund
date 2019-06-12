@@ -27,5 +27,6 @@
     <string name="label_company_name">公司名稱</string>
     <string name="label_info">個股資訊</string>
     <string name="zero">0.0</string>
+    <string name="label_name">ストック ヘルパー</string>
 
 </resources>

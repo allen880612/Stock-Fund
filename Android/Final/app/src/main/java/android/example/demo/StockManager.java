@@ -379,8 +379,5 @@ public class StockManager implements Serializable{
         }
     };
 
-
-
-
 }
 

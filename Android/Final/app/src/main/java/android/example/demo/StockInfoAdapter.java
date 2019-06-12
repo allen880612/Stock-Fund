@@ -45,20 +45,9 @@ public class StockInfoAdapter extends
         public void onClick(View v) {
             // Get the position of the item that was clicked.
             int pos = getLayoutPosition();
-            // Use that to access the affected item in nameList.
-            //String element = nameList[mPosition];
-
             Intent intent = new Intent(mContext, Description.class);
             intent.putExtra("STOCK_INFO", stockList.get(pos));
-            //intent.putExtra("INDEX", mPosition);
-
             v.getContext().startActivity(intent);
-
-            // Change the word in the nameList.
-            //nameList.set(mPosition, "點! " + element);
-
-            // update the RecyclerView to display the data.
-            //mAdapter.notifyDataSetChanged();
         }
     }
 

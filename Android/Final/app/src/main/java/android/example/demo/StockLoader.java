@@ -252,12 +252,6 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
     // Get Stock object from parse json
     private ArrayList<StockHolder> GetStock(String _jsonArray)
     {
-//        if (_jsonArray.isEmpty() || _jsonArray.equals(" "))
-//        {
-//            Log.d("Error", "Sever no data or no NetWork");
-//            return null;
-//        }
-
         String mResult = "";
         ArrayList<StockHolder> resultStocks = new ArrayList<StockHolder>();
         try {
@@ -266,10 +260,6 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
 
             // Get String data of Stock
             JSONArray jData = jobj.getJSONArray("Data");
-//            JSONArray jTitle = jobj.getJSONArray("Title");
-
-
-
             for (int i = 0; i < jData.length(); i++)
             {
                 JSONArray jStock = jData.getJSONArray(i);
@@ -284,33 +274,6 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
                     }
                 }
                 resultStocks.add(new StockHolder(dataStrings));
-
-//                String sCode = jStocks.getString(0);    // 股票代號
-//                String sName = jStocks.getString(1);    // 股票名稱
-//                String sOpen = jStocks.getString(3);    // 開盤價
-//                String sHigh = jStocks.getString(4);    // 最高價
-//                String sLow = jStocks.getString(5);     // 最低
-//                String sClose = jStocks.getString(6);   // 收盤
-//                String sUpDown = jStocks.getString(7);  // 漲跌
-//                String sUPDownP = jStocks.getString(8); // 漲幅(%)
-//
-//                String result = sCode + " " + sName + " " + sOpen + " "
-//                                + sHigh + " " + sLow + " " + sClose;
-//                Log.d("auau Result " , result);
-
-                //resultStock.add(new StockHolder());
-
-                //Log.d("auau Stock " , jStocks.toString());
-
-//                String 切割法
-//                String temp = jStock.toString();
-//                String[] ary = temp.split(",");
-//                for (int j = 0; j < ary.length; j++)
-//                {
-//
-//                    Log.d("auau String ", ary[j]);
-//                }
-
             }
         }
         catch (JSONException e)
@@ -329,17 +292,4 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
 
         return resultStocks;
     }
-
-//    private ArrayList<StockHolder> SortStock(ArrayList<StockHolder> _stocks, Comparator _comparator)
-//    {
-//        // sort by close
-//        Collections.sort(_stocks, _comparator);
-//
-//        for ( StockHolder sh : _stocks )
-//        {
-//            Log.d("auau sort:", sh.GetCode() + ", upDown percent: " + sh.GetUpDownP());
-//        }
-//        return _stocks;
-//    }
-
 }

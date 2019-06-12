@@ -13,35 +13,32 @@ public class StockHolder implements Serializable {
 
     private static final long serialVersionUID = 2333;
 
-    public StockHolder(String[] _data)
-    {
-        code        = _data[0];
-        name        = _data[1];
-        date        = _data[2];
-        open        = _data[3];
-        high        = _data[4];
-        low         = _data[5];
-        close       = _data[6];
-        upDown      = _data[7];
-        upDownP     = _data[8];
-        amplitude   = _data[9];
-        volume_num  = _data[10];
-        deal_num    = _data[11];
-        deal_price  = _data[12];
-        goban       = _data[16];
-        mk_value    = _data[17];
-        mk_percent  = _data[18];
-        PER         = _data[19];
-        PBR         = _data[20];
+    public StockHolder(String[] _data) {
+        code = _data[0];
+        name = _data[1];
+        date = _data[2];
+        open = _data[3];
+        high = _data[4];
+        low = _data[5];
+        close = _data[6];
+        upDown = _data[7];
+        upDownP = _data[8];
+        amplitude = _data[9];
+        volume_num = _data[10];
+        deal_num = _data[11];
+        deal_price = _data[12];
+        goban = _data[16];
+        mk_value = _data[17];
+        mk_percent = _data[18];
+        PER = _data[19];
+        PBR = _data[20];
         PER_4Season = _data[21];
-        turnover    = _data[22];
+        turnover = _data[22];
 
     }
 
-    public String GetValueByKey(String _key)
-    {
-        switch(_key)
-        {
+    public String GetValueByKey(String _key) {
+        switch (_key) {
             case "CODE":
                 return code;
 
@@ -176,36 +173,11 @@ public class StockHolder implements Serializable {
     private String turnover;    // 周轉率
 
 
-    private float GetFloat(String _in)
-    {
+    private float GetFloat(String _in) {
         if (_in.isEmpty())
             return 0;
 
         return Float.parseFloat(this.close);
     }
+}
 
-//    @Override
-//    public int compareTo(Object o)
-//    {
-//        StockHolder sh = (StockHolder) o;
-//
-//        int result = 0;
-//        float self, another;
-//
-//        // 防空字串
-//        self = GetFloat(this.close);
-//        another = GetFloat(sh.close);
-//
-//        //Log.d("auau compare", this.close + " vs " + sh.close);
-//
-//        // 大到小
-//        if (self > another)
-//            result = -1;
-//        else if(self < another)
-//            result = 1;
-//
-//        return result;
-//    }
-
-
-} //end of class
