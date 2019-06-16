@@ -3,25 +3,6 @@
     <string name="Tip_choice_1">請選擇您有興趣的項目：</string>
     <string name="Tip_fund">請挑選您的需求</string>
     <string name="etf_label_top">推薦您推的 ETF</string>
-
-    <string-array name="list_area">
-        <item>國內</item>
-        <item>國外</item>
-        <item>全部</item>
-    </string-array>
-
-    <string-array name="list_types">
-        <item>股票型基金</item>
-        <item>債券型基金</item>
-        <item>平衡型基金</item>
-        <item>貨幣型基金</item>
-        <item>全部</item>
-    </string-array>
-
-    <string-array name="list_strategys">
-        <item>積極型</item>
-        <item>平衡型</item>
-        <item>保守型</item>
-    </string-array>
+    <string name="Btn_confirm">確定</string>
 
 </resources>

@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="list_area">
+        <item>國內</item>
+        <item>國外</item>
+        <item>全部</item>
+    </string-array>
+
+    <string-array name="list_types">
+        <item>股票型基金</item>
+        <item>債券型基金</item>
+        <item>平衡型基金</item>
+        <item>貨幣型基金</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="list_risk">
+        <item>保守</item>
+        <item>穩健</item>
+        <item>積極</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="list_time">
+        <item>一年</item>
+        <item>兩年</item>
+        <item>全部</item>
+    </string-array>
+
+    <string-array name="list_return_percent">
+        <item>5% 以上</item>
+        <item>10% 以上</item>
+        <item>15% 以上</item>
+        <item>全部</item>
+    </string-array>
+
+    <string-array name="list_beta_value">
+        <item>正負 0.3以下</item>
+        <item>正負 0.7以下</item>
+        <item>正負 1以下</item>
+        <item>正負 2以下</item>
+        <item>全部</item>
+    </string-array>
+
+    <string-array name="list_scale">
+        <item>50億 以上</item>
+        <item>100億 以上</item>
+        <item>300億 以上</item>
+        <item>全部</item>
+    </string-array>
+
+    <string-array name="list_strategys">
+        <item>積極型</item>
+        <item>平衡型</item>
+        <item>保守型</item>
+    </string-array>
+
     <!-- ETF -->
     <string-array name="list_ETF">
         <item>ETF_1</item>

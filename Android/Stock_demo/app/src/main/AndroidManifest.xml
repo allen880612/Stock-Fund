@@ -19,7 +19,7 @@
             android:parentActivityName=".Load" />
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".BackTesting" />
+            android:parentActivityName=".Load" />
         <activity android:name=".Load">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

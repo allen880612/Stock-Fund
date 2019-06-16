@@ -13,9 +13,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlue</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:layout_marginTop">40dp</item>
-        <!--<item name="android:gravity">center</item>-->
+        <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -23,10 +23,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorRed</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">16sp</item>
         <!--<item name="android:lineSpacingMultiplier">1.5</item>-->
         <item name="android:layout_marginTop">20dp</item>
-        <!--<item name="android:gravity">center</item>-->
+        <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -34,10 +34,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:layout_marginTop">10dp</item>
-        <!--<item name="android:gravity">center</item>-->
+        <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -45,40 +45,31 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="code">
+    <style name="recycler_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="code" parent="recycler_text">
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="name">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">24sp</item>
+    <style name="name" parent="recycler_text">
         <item name="android:textStyle">normal</item>
-        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorName</item>
     </style>
 
-    <style name="label_price">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:gravity">center</item>
+    <style name="label_price" parent="recycler_text">
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="price">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">24sp</item>
+    <style name="price" parent="recycler_text">
         <item name="android:textStyle">bold</item>
-        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorPrice</item>
     </style>
 

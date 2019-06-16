@@ -8,30 +8,37 @@
     android:orientation="vertical"
     tools:context=".BackTesting">
 
-    <TextView
-        android:id="@+id/label_tool"
-        style="@style/Label"
-        android:text="回測結果" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/label_case1"
-        style="@style/Label_small"
-        android:text="@string/label_case1" />
+        <TextView
+            android:id="@+id/label_tool"
+            style="@style/Label"
+            android:text="回測結果" />
 
-    <TextView
-        android:id="@+id/case1"
-        style="@style/description"
-        android:text="@string/back_case1" />
+        <TextView
+            android:id="@+id/label_case1"
+            style="@style/Label_small"
+            android:text="@string/label_case1" />
 
-    <TextView
-        android:id="@+id/label_case2"
-        style="@style/Label_small"
-        android:text="@string/label_case2" />
+        <TextView
+            android:id="@+id/case1"
+            style="@style/description"
+            android:text="@string/back_case1" />
 
-    <TextView
-        android:id="@+id/case2"
-        style="@style/description"
-        android:text="@string/back_case2" />
+        <TextView
+            android:id="@+id/label_case2"
+            style="@style/Label_small"
+            android:text="@string/label_case2" />
+
+        <TextView
+            android:id="@+id/case2"
+            style="@style/description"
+            android:text="@string/back_case2" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"

@@ -34,7 +34,8 @@ class strategy:
         
         # 設置url
         data_url ='https://owl.cmoney.com.tw/OwlApi/api/v2/json/'
-        url = data_url + "BABA0010-14644b"
+        
+        url = data_url + "E1-13000b"
         #呼叫API
         data_headers = {'authorization': 'Bearer '+self.token}
         #data_res = requests.request('GET', url, headers = data_headers)
@@ -61,11 +62,14 @@ class strategy:
     # 以權重衡量基金
     def handle(self, data, dt):
         # 確定是有效基金資料
+        '''
         if (not data[18].strip()):
             return ""
+        '''
 
         print(data)
         print("==============================================================================")
+        '''
         code = data[0]
         name = data[1]
         #fType = data[7]
@@ -77,6 +81,7 @@ class strategy:
         area = data[28]
         risk = data[30]
         print(code, name, founding_time, x1, x2, area, risk)
+        '''
         
 
 
