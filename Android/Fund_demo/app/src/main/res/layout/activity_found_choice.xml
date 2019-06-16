@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="80dp"
     android:orientation="vertical"
     tools:context=".Found_choice">
 
@@ -16,40 +15,108 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:paddingLeft="80dp"
-        android:paddingRight="80dp">
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
 
+        <!-- label risk-->
         <TextView
-            android:id="@+id/label_1"
+            android:id="@+id/label_risk"
             style="@style/Label_small"
             android:layout_weight="1"
-            android:text="類型" />
+            android:text="風險評等" />
 
         <Spinner
-            android:id="@+id/spinner_type"
+            android:id="@+id/spinner_risk"
             style="@style/spinner" />
-
+        <!-- label return-->
         <TextView
-            android:id="@+id/label_2"
+            android:id="@+id/label_return"
             style="@style/Label_small"
             android:layout_weight="1"
-            android:text="偏好" />
+            android:text="年化報酬率" />
+
+        <LinearLayout
+            style="@style/linear_layout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/label_return_interval"
+                style="@style/Label_choice"
+                android:layout_weight="1"
+                android:text="時間" />
+
+            <Spinner
+                android:id="@+id/spinner_return_time"
+                style="@style/spinner"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linear_layout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/label_return_percent"
+                style="@style/Label_choice"
+                android:layout_weight="1"
+                android:text="條件" />
+
+            <Spinner
+                android:id="@+id/spinner_return_percent"
+                style="@style/spinner"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+        <!-- label beta-->
+        <TextView
+            android:id="@+id/label_beta"
+            style="@style/Label_small"
+            android:layout_weight="1"
+            android:text="Beta" />
+
+        <LinearLayout
+            style="@style/linear_layout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/label_beta_time"
+                style="@style/Label_choice"
+                android:layout_weight="1"
+                android:text="時間" />
+
+            <Spinner
+                android:id="@+id/spinner_beta_time"
+                style="@style/spinner"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linear_layout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/label_beta_value"
+                style="@style/Label_choice"
+                android:layout_weight="1"
+                android:text="條件" />
+
+            <Spinner
+                android:id="@+id/spinner_beta_value"
+                style="@style/spinner"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <!-- label scale-->
+        <TextView
+            android:id="@+id/label_scale"
+            style="@style/Label_small"
+            android:layout_weight="1"
+            android:text="基金規模" />
 
         <Spinner
-            android:id="@+id/spinner_stratage"
+            android:id="@+id/spinner_scale"
             style="@style/spinner" />
-
-        <!--<TextView-->
-            <!--android:id="@+id/Label_small"-->
-            <!--style="@style/Label_small"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="類型" />-->
-
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner_3"-->
-            <!--style="@style/spinner" />-->
 
     </LinearLayout>
 
@@ -57,10 +124,9 @@
         android:id="@+id/button"
         style="@style/button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_style"
         android:onClick="GoToResult"
-        android:text="確定" />
-
+        android:text="@string/Btn_confirm" />
 
 </LinearLayout>

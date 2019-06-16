@@ -7,17 +7,14 @@
         <item>全部</item>
     </string-array>
 
-    <string-array name="list_types">
-        <item>股票型基金</item>
-        <item>債券型基金</item>
-        <item>平衡型基金</item>
-        <item>貨幣型基金</item>
+    <string-array name="list_etf_types">
+        <item>淨值排序</item>
+        <item>折溢價百分比排序</item>
         <item>全部</item>
     </string-array>
-    <string-array name="list_risk">
-        <item>保守</item>
-        <item>穩健</item>
-        <item>積極</item>
+    <string-array name="list_etf_number">
+        <item>5 檔</item>
+        <item>10 檔</item>
         <item>全部</item>
     </string-array>
     <string-array name="list_time">
