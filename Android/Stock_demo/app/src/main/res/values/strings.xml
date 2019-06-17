@@ -10,11 +10,11 @@
     <string name="label_case1">做多策略</string>
     <string name="label_case2">放空策略</string>
     <string name="description_tool">
-        SMA200：判斷作多或是作空\nSMA5：判斷平倉時機\nRSI 5：判斷入市時機</string>
+        SMA200：判斷作多或是作空\nSMA5：判斷平倉時機\nRSI(5)：判斷入市時機</string>
 
     <string name="case1">
        \t1: 當股價高於SMA200時作多\n
-       \t2: RSI(2)低於10以下，為買入訊號</string>
+       \t2: RSI(5)低於10以下，為買入訊號</string>
 
     <string name="case2">
         \t1: 當股價低於SMA200時放空\n

@@ -86,7 +86,20 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
         String appid= "20190507130014440"; //cycu.owl@gmail.com
         String appsecret = "fffee680708411e9aa98000c29beef84";
         // 連線---------------
+//        String token_url = "https://owl.cmoney.com.tw/OwlApi/auth";
+//        String data_url = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/";
+        // 組連線參數--------------
+        String token_params = "appId=" + appid + "&appSecret=" + appsecret;
+        String header1 = "Content-Type";
+        String header2 = "application/x-www-form-urlencoded";
 
+        // 步驟一:驗證----------
+        HttpURLConnection conn = null;
+        BufferedReader reader = null;
+
+        try {
+            // Build the URL
+            URL url = new URL(TOKEN_URL);
             byte[] postDataBytes = token_params.getBytes("UTF-8");
 
             // Connect to api

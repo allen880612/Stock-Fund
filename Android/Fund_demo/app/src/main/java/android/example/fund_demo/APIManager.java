@@ -1,6 +1,13 @@
 package android.example.fund_demo;
 
+import android.example.fund_demo.Fund.Fund;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,17 +16,43 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Calendar;
 
-public class APIManager {
+public class APIManager{
 
-    public APIManager()
+    private String API;
+    private String JSONResult;
+    private String token;
+    private final String DATA_URL = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/";
+    private final String TOKEN_URL = "https://owl.cmoney.com.tw/OwlApi/auth";
+
+    public APIManager(String _api)
     {
-        Initialize();
+        //API = _api;
+        Initialize(_api);
     }
 
-    private void Initialize()
+    private void Initialize(String _api)
     {
-        token = GetToken();
+        Log.d("auau", "loadinBK");
+
+        try {
+            JSONObject jObj= new JSONObject(GetToken());
+            token = jObj.getString("token");
+            Log.d("auau Token", token);
+
+            JSONResult = GetData(token, _api);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String GetResult()
+    {
+        return JSONResult;
     }
 
     // Get the token
@@ -97,23 +130,43 @@ public class APIManager {
         return token;
     }
 
+    // Get the system date
+    private String GetDate()
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);        // get yesterday
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;   // calender start from "0 month"
+        int day = calendar.get(Calendar.DATE);
+
+        String date = String.valueOf(year);
+        if (month < 10)
+            date += "0";
+        date += String.valueOf(month);
+        if (day < 10)
+            date += "0";
+        date += String.valueOf(day);
+
+        Log.d("Date", date);
+        return date;
+    }
+
     // Get json data from sever
-    public String GetData(String _api)
+    private String GetData(String _token, String _api)
     {
         String result = " ";
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         // token get fail
-        if (token.equals(" "))
+        if (_token.equals(" "))
         {
             return result;
         }
         try {
             URL url = new URL(DATA_URL + _api);
-//            String userCredentials = "username:password";
-            //String basicAuth = "Bearer " + (URLEncoder.encode(_token, "UTF-8"));
-            String basicAuth = "Bearer " + token;
+            String basicAuth = "Bearer " + _token;
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Authorization", basicAuth);
@@ -159,10 +212,4 @@ public class APIManager {
         }
         return result;
     }
-
-    private String API;
-    private String token;
-    //private String jsonResult;
-    private final String DATA_URL = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/";
-    private final String TOKEN_URL = "https://owl.cmoney.com.tw/OwlApi/auth";
 }

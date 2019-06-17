@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+
 public class Load extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<StockManager>{
 

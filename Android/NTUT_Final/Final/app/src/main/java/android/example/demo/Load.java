@@ -143,7 +143,8 @@ public class Load extends AppCompatActivity
     @Override
     public Loader< StockManager > onCreateLoader(int i, @Nullable Bundle args) {
         Log.d("auau", "Start Load");
-        String API = "BABA0010-14663b";
+        //String API = "BABA0010-14663b";
+        String API = "BABA0010-14644b";
 
         //String[] stockCode = getResources().getStringArray(R.array.list_stock_code);
         //String stockData = getResources().getString(R.string.stock_data_json);
