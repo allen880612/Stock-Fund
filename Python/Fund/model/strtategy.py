@@ -35,13 +35,21 @@ class strategy:
         # 設置url
         data_url ='https://owl.cmoney.com.tw/OwlApi/api/v2/json/'
         
-        url = data_url + "E1-13000b"
+        #url = data_url + "E1-13000b"       #ETF 指標
+        #url = data_url + "L1-352433b"      #基金 年化報酬率
+        url = data_url + "BABA0010-14644b"  #基金 基本資料
+        #url = data_url + "L1-352098b"      #基金 基本資料 (403
+
+        #url = data_url + "L1-352435b"      #基金 beta
+        #url = data_url + "F8-310631b"      #基金 規模 (403
+
+        
         #呼叫API
         data_headers = {'authorization': 'Bearer '+self.token}
         #data_res = requests.request('GET', url, headers = data_headers)
 
         data_res = requests.request('GET', url, headers = data_headers)
-        #url = data_url + "BABA003-312255b"
+        
         print ("status cade = " + str(data_res.status_code))
         
         #判斷是否成功
