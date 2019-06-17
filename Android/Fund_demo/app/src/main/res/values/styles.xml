@@ -31,10 +31,21 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="list_code" parent="list_item">
+        <item name="android:textColor">@color/colorBlue</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="list_price" parent="list_item">
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 
     <style name="Label_choice">
         <item name="android:layout_width">wrap_content</item>

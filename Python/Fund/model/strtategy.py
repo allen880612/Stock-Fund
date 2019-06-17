@@ -40,9 +40,12 @@ class strategy:
         url = data_url + "BABA0010-14644b"  #基金 基本資料
         #url = data_url + "L1-352098b"      #基金 基本資料 (403
 
-        #url = data_url + "L1-352435b"      #基金 beta
         #url = data_url + "F8-310631b"      #基金 規模 (403
 
+        #url = data_url + "L1-352100a"      #基金 beta
+        
+        #url += "/" + "00965469" + "/1"
+        #url = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/L1-352100a/00974066/1"
         
         #呼叫API
         data_headers = {'authorization': 'Bearer '+self.token}
@@ -56,7 +59,13 @@ class strategy:
         if (data_res.status_code==200):
             #解析與顯示資料
             data = json.loads(data_res.text)
+
+            title = data.get('Title')
+            print(title);
             args = data.get('Data')
+            print("length = " + str(len(args)))
+            
+            #print(args)
             
             self.handle(args[0], dt)
             

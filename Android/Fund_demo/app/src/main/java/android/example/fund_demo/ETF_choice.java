@@ -215,7 +215,7 @@ public class ETF_choice extends AppCompatActivity {
         spr_number.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                fNumber = getResources().getStringArray(R.array.list_strategys)[_pos];
+                fNumber = getResources().getStringArray(R.array.list_etf_number)[_pos];
                 ToastMsg(fNumber);
             }
 

@@ -25,40 +25,44 @@ public class APIManager{
     private String API;
     private String JSONResult;
     private String token;
+    private boolean isSuccessful;
     private final String DATA_URL = "https://owl.cmoney.com.tw/OwlApi/api/v2/json/";
     private final String TOKEN_URL = "https://owl.cmoney.com.tw/OwlApi/auth";
 
-    public APIManager(String _api)
+    public APIManager()
     {
         //API = _api;
-        Initialize(_api);
+        //Initialize(_api);
+        isSuccessful = true;
     }
 
-    private void Initialize(String _api)
-    {
-        Log.d("auau", "loadinBK");
-
-        try {
-            JSONObject jObj= new JSONObject(GetToken());
-            token = jObj.getString("token");
-            Log.d("auau Token", token);
-
-            JSONResult = GetData(token, _api);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void Initialize(String _api)
+//    {
+//        Log.d("auau api begin", _api);
+//
+//        try {
+//            JSONObject jObj= new JSONObject(GetToken());
+//            token = jObj.getString("token");
+//            Log.d("auau Token", token);
+//
+//            JSONResult = GetData(token, _api);
+//
+//        } catch (JSONException e) {
+//            isSuccessful = false;
+//            e.printStackTrace();
+//        }
+//    }
 
     public String GetResult()
     {
         return JSONResult;
     }
-
+    public Boolean IsSuccessful(){return isSuccessful;};
     // Get the token
-    private String GetToken()
+    public String GetToken()
     {
-        String token = " ";
+        isSuccessful = true;
+        String result = "";
 
         // 帳號設定------------
         String appid= "20190507130014440"; //cycu.owl@gmail.com
@@ -93,7 +97,8 @@ public class APIManager{
             if (response_code != 200)
             {
                 Log.d("Get token error", Integer.toString(response_code));
-                return token;
+                isSuccessful = false;
+                return result;
             }
             Log.d("Get token success", Integer.toString(response_code));
 
@@ -108,8 +113,22 @@ public class APIManager{
                 Log.d("Response: ", "> " + line);   //here u will get whole response...... :-)
             }
             Log.d("run", "GetData");
-            token = buffer.toString();
-            return token;
+            String jToken = buffer.toString();
+
+            JSONObject jObj= null;
+            try {
+                jObj = new JSONObject(jToken);
+                result = jObj.getString("token");
+                Log.d("auau Token", result);
+
+                return result;
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            isSuccessful = false;
+            return result;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -127,11 +146,12 @@ public class APIManager{
                 e.printStackTrace();
             }
         }
-        return token;
+        isSuccessful = false;
+        return result;
     }
 
     // Get the system date
-    private String GetDate()
+    public String GetDate()
     {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);        // get yesterday
@@ -153,18 +173,19 @@ public class APIManager{
     }
 
     // Get json data from sever
-    private String GetData(String _token, String _api)
+    public String GetData(String _token, String _api)
     {
         String result = " ";
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         // token get fail
-        if (_token.equals(" "))
+        if (_token.equals(""))
         {
             return result;
         }
         try {
+            isSuccessful = true;
             URL url = new URL(DATA_URL + _api);
             String basicAuth = "Bearer " + _token;
             connection = (HttpURLConnection) url.openConnection();
@@ -176,10 +197,11 @@ public class APIManager{
 
             if (response_code != 200)
             {
-                Log.d("auau Error", Integer.toString(response_code));
+                Log.d("auau apiManager Error", Integer.toString(response_code));
+                isSuccessful = false;
                 return result;
             }
-            Log.d("auau connect success", Integer.toString(response_code));
+            Log.d("auau apiManager success", Integer.toString(response_code));
 
             InputStream stream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(stream));
@@ -191,6 +213,7 @@ public class APIManager{
                 Log.d("Response: ", "> " + line);   //here u will get whole response...... :-)
             }
             Log.d("run", "GetData");
+
             return buffer.toString();
 
 
@@ -210,6 +233,7 @@ public class APIManager{
                 e.printStackTrace();
             }
         }
+        isSuccessful = false;
         return result;
     }
 }

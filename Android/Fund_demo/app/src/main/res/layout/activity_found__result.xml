@@ -10,16 +10,13 @@
     <TextView
         android:id="@+id/label_top"
         style="@style/Label"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="為您推薦" />
 
-    <ListView
-        android:id="@+id/viewList"
-        android:divider="@color/colorBlack"
-        android:dividerHeight="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_fund"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

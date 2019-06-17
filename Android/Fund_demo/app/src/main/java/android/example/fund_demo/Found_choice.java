@@ -1,6 +1,7 @@
 package android.example.fund_demo;
 
 import android.content.Intent;
+import android.example.fund_demo.Fund.Fund;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,81 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 
 public class Found_choice extends AppCompatActivity {
 
-//    private Spinner spinner_type;
-//    private Spinner spinner_strategy;
-//    private String fType, fStrategy;
-//    private final String TYPE = "type", STRATEGY = "strategy";
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_found_choice);
-//
-//        Initialize();
-//
-//        SetSpinnerListener();
-//    }
-//
-//    void Initialize()
-//    {
-//        spinner_type = (Spinner)findViewById(R.id.spinner_type);
-//        spinner_strategy = (Spinner)findViewById(R.id.spinner_stratage);
-//
-//        ArrayAdapter<CharSequence> typeList = ArrayAdapter.createFromResource(this,
-//                R.array.list_types,
-//                android.R.layout.simple_spinner_dropdown_item);
-//
-//        ArrayAdapter<CharSequence>  strategyList = ArrayAdapter.createFromResource(this,
-//                R.array.list_strategys,
-//                android.R.layout.simple_spinner_dropdown_item);
-//
-//        spinner_type.setAdapter(typeList);
-//        spinner_strategy.setAdapter(strategyList);
-//    }
-//
-//    void SetSpinnerListener()
-//    {
-//        spinner_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-//                fType = getResources().getStringArray(R.array.list_types)[_pos];
-//                Toast.makeText(Found_choice.this, fType, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                Toast.makeText(Found_choice.this, "請選擇一項!!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        spinner_strategy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-//                fStrategy = getResources().getStringArray(R.array.list_strategys)[_pos];
-//                Toast.makeText(Found_choice.this, fStrategy, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                Toast.makeText(Found_choice.this, "請選擇一項!!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//    public void GoToResult(View view) {
-//        Intent intent = new Intent(this, Found_Result.class);
-//        intent.putExtra(TYPE, fType);
-//        intent.putExtra(STRATEGY, fStrategy);
-//        startActivity(intent);
-//    }
-
     private Spinner spr_risk, spr_return_time, spr_return_p;
     private Spinner  spr_beta_time, spr_beta_value, spr_scale;
-    private String eRisk, eReturnTime, eReturnP;
-    private String eBetaTime, eBetaValue, eScale;
+    private String fRisk, fReturnTime, fReturnP;
+    private String fBetaTime, fBetaValue, fScale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +80,8 @@ public class Found_choice extends AppCompatActivity {
         spr_risk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                eRisk = getResources().getStringArray(R.array.list_etf_number)[_pos];
-                ToastMsg(eRisk);
+                fRisk = getResources().getStringArray(R.array.list_etf_number)[_pos];
+                ToastMsg(fRisk);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -157,8 +93,8 @@ public class Found_choice extends AppCompatActivity {
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                eReturnP = getResources().getStringArray(R.array.list_return_percent)[_pos];
-                ToastMsg(eReturnP);
+                fReturnP = getResources().getStringArray(R.array.list_return_percent)[_pos];
+                ToastMsg(fReturnP);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -169,8 +105,8 @@ public class Found_choice extends AppCompatActivity {
         spr_return_time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                eReturnTime = getResources().getStringArray(R.array.list_time)[_pos];
-                ToastMsg(eReturnTime);
+                fReturnTime = getResources().getStringArray(R.array.list_time)[_pos];
+                ToastMsg(fReturnTime);
             }
 
             @Override
@@ -183,8 +119,8 @@ public class Found_choice extends AppCompatActivity {
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                eBetaValue = getResources().getStringArray(R.array.list_beta_value)[_pos];
-                ToastMsg(eBetaValue);
+                fBetaValue = getResources().getStringArray(R.array.list_beta_value)[_pos];
+                ToastMsg(fBetaValue);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -195,8 +131,8 @@ public class Found_choice extends AppCompatActivity {
         spr_beta_time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                eBetaTime = getResources().getStringArray(R.array.list_time)[_pos];
-                ToastMsg(eBetaTime);
+                fBetaTime = getResources().getStringArray(R.array.list_time)[_pos];
+                ToastMsg(fBetaTime);
 
             }
 
@@ -211,8 +147,8 @@ public class Found_choice extends AppCompatActivity {
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
-                eScale = getResources().getStringArray(R.array.list_scale)[_pos];
-                ToastMsg(eScale);
+                fScale = getResources().getStringArray(R.array.list_scale)[_pos];
+                ToastMsg(fScale);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -225,14 +161,107 @@ public class Found_choice extends AppCompatActivity {
     public void GoToResult(View view) {
         Intent intent = new Intent(this,Found_Result.class);
         Bundle bundle = new Bundle();
-        bundle.putString("RISK", eRisk);
-        bundle.putString("RETURN_TIME", eReturnTime);
-        bundle.putString("RETURN_CONDITION", eReturnP);
-        bundle.putString("BETA_TIME", eBetaTime);
-        bundle.putString("BETA_CONDITION", eBetaValue);
-        bundle.putString("SCALE", eScale);
+        ArrayList<Fund> fundChoice = GetChoiceFunds();
+        bundle.putSerializable("MEET_FUND", (Serializable) fundChoice);
+        bundle.putString("RISK", fRisk);
+        bundle.putString("RETURN_TIME", fReturnTime);
+        bundle.putString("RETURN_CONDITION", fReturnP);
+        bundle.putString("BETA_TIME", fBetaTime);
+        bundle.putString("BETA_CONDITION", fBetaValue);
+        bundle.putString("SCALE", fScale);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
+    }
+
+    private ArrayList<Fund> GetChoiceFunds()
+    {
+        Bundle bundle = getIntent().getExtras();
+        ArrayList<Fund> meetFunds = new ArrayList<>();
+
+        if (bundle != null)
+        {
+            ArrayList<Fund> funds = (ArrayList<Fund>) bundle.getSerializable("FUND_DATA");
+            for (Fund fund : funds)
+            {
+                // 符合篩選條件
+                if (MeetCondition(fund))
+                {
+                    meetFunds.add(fund);
+                }
+            }
+            return meetFunds;
+        }
+
+        return null;
+    }
+
+    private boolean MeetCondition(Fund fund)
+    {
+        if (!MeetRisk(fund))
+            return false;
+        if (!MeetReturn(fund))
+            return false;
+        if (MeetBeta(fund))
+            return false;
+        if (MeetScale(fund))
+            return false;
+
+        return true;
+    }
+    private boolean MeetRisk(Fund fund)
+    {
+        String fund_risk = fund.GetRisk();
+
+        if (fRisk.equals("保守"))
+            return fund_risk.equals("RR1") || fund_risk.equals("RR2");
+        else if (fRisk.equals("穩健"))
+            return fund_risk.equals("RR3") || fund_risk.equals("RR4");
+        else if (fRisk.equals("積極"))
+            return fund_risk.equals("RR5");
+        return true;    //all
+    }
+    private boolean MeetReturn(Fund fund)
+    {
+        String fund_return = fReturnTime.equals("一年") ?  fund.GetReturn_1y() : fund.GetReturn_2y();
+        float fr_double = fund_return.isEmpty()? 0 : Float.valueOf(fund_return);
+
+        if (fReturnP.equals("5% 以上"))
+            return fr_double >= 0.05;
+        else if (fReturnP.equals("10% 以上"))
+            return fr_double >= 0.1;
+        else if (fReturnP.equals("15% 以上"))
+            return fr_double >= 0.15;
+        return true;    //all
+    }
+    private boolean MeetBeta(Fund fund)
+    {
+        String fund_beta = fBetaTime.equals("一年") ?  fund.GetBeta_1y() : fund.GetBeta_2y();
+        float fb_double = fund_beta.isEmpty()? 10 : Float.valueOf(fund_beta);
+        fb_double = Math.abs(fb_double);
+
+        if (fBetaValue.equals("正負 0.3以下"))
+            return fb_double < 0.3;
+        else if (fBetaValue.equals("正負 0.7以下"))
+            return fb_double < 0.7;
+        else if (fBetaValue.equals("正負 1以下"))
+            return fb_double < 1;
+        else if (fBetaValue.equals("正負 2以下"))
+            return fb_double < 2;
+        return true;    //all
+    }
+    private boolean MeetScale(Fund fund)
+    {
+        String fund_scale = fund.GetScale();
+        float fs_double = fund_scale.isEmpty()? 0 : Float.valueOf(fund_scale);
+
+        if (fScale.equals("50億 以上"))
+            return fs_double > 50;
+        else if (fBetaValue.equals("100億 以上"))
+            return fs_double > 100;
+        else if (fBetaValue.equals("300億 以上"))
+            return fs_double > 300;
+        return true;    //all
     }
 
     public void ToastMsg(String _msg)
