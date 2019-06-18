@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.example.fund_demo.Fund.Fund;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,12 +22,55 @@ public class Found_choice extends AppCompatActivity {
     private String fRisk, fReturnTime, fReturnP;
     private String fBetaTime, fBetaValue, fScale;
 
+    private ArrayList<Fund> inputFunds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found_choice);
 
         Initialize();
+
+        if (savedInstanceState == null)
+        {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null)
+            {
+                ArrayList<Fund> saveFund = (ArrayList<Fund>) bundle.getSerializable("FUND_DATA");
+                inputFunds =  (ArrayList<Fund>) saveFund.clone();
+//                Log.d("auau get", "get success");
+//                for (Fund fund : inputFunds)
+//                {
+//                    // 符合篩選條件
+//                    Log.d("auau getTest", fund.GetName());
+//                }
+            }
+        }
+        else
+        {
+            Object f_obj = savedInstanceState.getSerializable("SAVE_FUND");
+            if (savedInstanceState.getSerializable("SAVE_FUND") != null)
+            {
+                Log.d("auau state", "restore from create");
+                inputFunds = (ArrayList<Fund>) f_obj;
+            }
+        }
+    }
+
+    public void GetFundResource()
+    {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+            inputFunds = (ArrayList<Fund>) bundle.getSerializable("FUND_DATA");
+            Log.d("auau get", "get success");
+            for (Fund fund : inputFunds)
+            {
+                // 符合篩選條件
+                Log.d("auau getTest", fund.GetName());
+            }
+        }
+
     }
 
     void Initialize()
@@ -40,13 +84,42 @@ public class Found_choice extends AppCompatActivity {
 
         SetSpinnerResource();
         SetSpinnerListener();
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (inputFunds != null)
+        {
+            outState.putSerializable("SAVE_FUND", (Serializable) inputFunds);
+
+        }
+        Log.d("auau state", "save instance");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null)
+        {
+            Object f_obj = savedInstanceState.getSerializable("SAVE_FUND");
+            inputFunds = (ArrayList<Fund>) f_obj;
+            Log.d("auau state", "restore from saveInstance");
+        }
+        else
+        {
+            Log.d("auau state", "restore error");
+        }
+        Log.d("auau state", "restore");
     }
 
     private void SetSpinnerResource()
     {
         // spinner risk resource
         ArrayAdapter<CharSequence> riskList = ArrayAdapter.createFromResource(this,
-                R.array.list_etf_number,
+                R.array.list_prefer,
                 android.R.layout.simple_spinner_dropdown_item);
         // spinner time resource
         ArrayAdapter<CharSequence>  listTime = ArrayAdapter.createFromResource(this,
@@ -171,29 +244,33 @@ public class Found_choice extends AppCompatActivity {
         bundle.putString("SCALE", fScale);
         intent.putExtras(bundle);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private ArrayList<Fund> GetChoiceFunds()
     {
-        Bundle bundle = getIntent().getExtras();
+        //Bundle bundle = getIntent().getExtras();
         ArrayList<Fund> meetFunds = new ArrayList<>();
 
-        if (bundle != null)
+        if (inputFunds == null) // not restore
         {
-            ArrayList<Fund> funds = (ArrayList<Fund>) bundle.getSerializable("FUND_DATA");
-            for (Fund fund : funds)
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null)
             {
-                // 符合篩選條件
-                if (MeetCondition(fund))
-                {
-                    meetFunds.add(fund);
-                }
+                inputFunds = (ArrayList<Fund>) bundle.getSerializable("FUND_DATA");
             }
-            return meetFunds;
+
         }
 
-        return null;
+        for (Fund fund : inputFunds)
+        {
+            // 符合篩選條件
+            if (MeetCondition(fund))
+            {
+                meetFunds.add(fund);
+            }
+        }
+        return meetFunds;
     }
 
     private boolean MeetCondition(Fund fund)
