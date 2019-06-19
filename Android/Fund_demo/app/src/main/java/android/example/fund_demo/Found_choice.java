@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ public class Found_choice extends AppCompatActivity {
     private Spinner  spr_beta_time, spr_beta_value, spr_scale;
     private String fRisk, fReturnTime, fReturnP;
     private String fBetaTime, fBetaValue, fScale;
-
+    private TextView tv_hint;
     private ArrayList<Fund> inputFunds;
 
     @Override
@@ -81,9 +82,11 @@ public class Found_choice extends AppCompatActivity {
         spr_beta_time = (Spinner)findViewById(R.id.spinner_beta_time);
         spr_beta_value = (Spinner)findViewById(R.id.spinner_beta_value);
         spr_scale = (Spinner)findViewById(R.id.spinner_scale);
-
+        tv_hint = (TextView) findViewById(R.id.label_hint);
         SetSpinnerResource();
         SetSpinnerListener();
+
+        tv_hint.setText(getString(R.string.label_hint));
 
     }
 
@@ -154,20 +157,23 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fRisk = getResources().getStringArray(R.array.list_etf_number)[_pos];
-                ToastMsg(fRisk);
+                tv_hint.setText(getString(R.string.risk_description));
+                //ToastMsg(fRisk);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 ToastMsg("請選擇一項!!");
             }
         });
+
         // set return rate listener
         spr_return_p.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fReturnP = getResources().getStringArray(R.array.list_return_percent)[_pos];
-                ToastMsg(fReturnP);
+                tv_hint.setText(getString(R.string.return_description));
+                //ToastMsg(fReturnP);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -179,7 +185,8 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fReturnTime = getResources().getStringArray(R.array.list_time)[_pos];
-                ToastMsg(fReturnTime);
+                tv_hint.setText(getString(R.string.return_description));
+                //ToastMsg(fReturnTime);
             }
 
             @Override
@@ -187,13 +194,15 @@ public class Found_choice extends AppCompatActivity {
                 ToastMsg("請選擇一項!!");
             }
         });
+
         // set beta listener
         spr_beta_value.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fBetaValue = getResources().getStringArray(R.array.list_beta_value)[_pos];
-                ToastMsg(fBetaValue);
+                tv_hint.setText(getString(R.string.beta_description));
+                //ToastMsg(fBetaValue);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -205,7 +214,8 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fBetaTime = getResources().getStringArray(R.array.list_time)[_pos];
-                ToastMsg(fBetaTime);
+                tv_hint.setText(getString(R.string.beta_description));
+                //ToastMsg(fBetaTime);
 
             }
 
@@ -215,13 +225,15 @@ public class Found_choice extends AppCompatActivity {
 
             }
         });
+
         // set scale listener
         spr_scale.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fScale = getResources().getStringArray(R.array.list_scale)[_pos];
-                ToastMsg(fScale);
+                tv_hint.setText(getString(R.string.scale_description));
+                //ToastMsg(fScale);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

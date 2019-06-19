@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
     android:orientation="vertical"
     tools:context=".Found_choice">
 
     <TextView
         android:id="@+id/label_hint"
-        style="@style/Label"
-        android:text="@string/Tip_fund" />
+        style="@style/Label_hint"
+        android:text="@string/label_hint" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/label_risk"
