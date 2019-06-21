@@ -170,7 +170,7 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fRisk = getResources().getStringArray(R.array.list_etf_number)[_pos];
-                tv_hint.setText(getString(R.string.risk_description));
+                //tv_hint.setText(getString(R.string.risk_description));
                 //ToastMsg(fRisk);
             }
             @Override
@@ -178,14 +178,13 @@ public class Found_choice extends AppCompatActivity {
                 ToastMsg("請選擇一項!!");
             }
         });
-
         // set return rate listener
         spr_return_p.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fReturnP = getResources().getStringArray(R.array.list_return_percent)[_pos];
-                tv_hint.setText(getString(R.string.return_description));
+                //tv_hint.setText(getString(R.string.return_description));
                 //ToastMsg(fReturnP);
             }
             @Override
@@ -198,7 +197,7 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fReturnTime = getResources().getStringArray(R.array.list_time)[_pos];
-                tv_hint.setText(getString(R.string.return_description));
+                //tv_hint.setText(getString(R.string.return_description));
                 //ToastMsg(fReturnTime);
             }
 
@@ -214,7 +213,7 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fBetaValue = getResources().getStringArray(R.array.list_beta_value)[_pos];
-                tv_hint.setText(getString(R.string.beta_description));
+                //tv_hint.setText(getString(R.string.beta_description));
                 //ToastMsg(fBetaValue);
             }
             @Override
@@ -227,7 +226,7 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fBetaTime = getResources().getStringArray(R.array.list_time)[_pos];
-                tv_hint.setText(getString(R.string.beta_description));
+                //tv_hint.setText(getString(R.string.beta_description));
                 //ToastMsg(fBetaTime);
 
             }
@@ -245,7 +244,7 @@ public class Found_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fScale = getResources().getStringArray(R.array.list_scale)[_pos];
-                tv_hint.setText(getString(R.string.scale_description));
+                //tv_hint.setText(getString(R.string.scale_description));
                 //ToastMsg(fScale);
             }
             @Override
@@ -369,5 +368,18 @@ public class Found_choice extends AppCompatActivity {
     public void ToastMsg(String _msg)
     {
         Toast.makeText(Found_choice.this, _msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public void SelectRisk(View v) {
+        tv_hint.setText(getString(R.string.risk_description));
+    }
+    public void SelectReturn(View v) {
+        tv_hint.setText(getString(R.string.return_description));
+    }
+    public void SelectBeta(View v) {
+        tv_hint.setText(getString(R.string.beta_description));
+    }
+    public void SelectScale(View v) {
+        tv_hint.setText(getString(R.string.scale_description));
     }
 }

@@ -5,11 +5,13 @@
     <string name="etf_label_top">推薦您推的 ETF</string>
     <string name="Btn_confirm">確定</string>
     <string name="label_finish">資料下載完成!</string>
-    <string name="label_hint">將顯示選擇之下拉選單，其指標說明</string>
+    <string name="label_hint">點擊選項標題，將顯示相關說明</string>
 
-    <string name="risk_description">risk description</string>
-    <string name="scale_description">scale description</string>
-    <string name="beta_description">beta description</string>
-    <string name="return_description">return description</string>
+    <string name="risk_description">
+        風險評等：針對基金之價格波動風險程度，依基金投資標的風險屬性
+        由低至高編制為「RR1、RR2、RR3、RR4、RR5」五個風險收益等級</string>
+    <string name="scale_description">基金規模( Fund Size )，是指某基金當前的資產價值( Asset Value )的大小</string>
+    <string name="beta_description">beta係數是用來衡量單一股票或者基金與參考指標間的相對變化關係</string>
+    <string name="return_description">年化報酬率(%) = (總報酬率+1)^(1/年數) -1</string>
 
 </resources>

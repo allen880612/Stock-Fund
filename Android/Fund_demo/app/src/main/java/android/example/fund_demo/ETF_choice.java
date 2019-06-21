@@ -48,7 +48,7 @@ public class ETF_choice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int _pos, long id) {
                 fType = getResources().getStringArray(R.array.list_etf_types)[_pos];
-                ToastMsg(fType);
+                //ToastMsg(fType);
             }
 
             @Override

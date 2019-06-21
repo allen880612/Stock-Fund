@@ -35,6 +35,7 @@ public class FundLoader extends AsyncTaskLoader<ArrayList<Fund>> {
 
     private APIManager apiManager;
     private Map<String, String> map_r_1y, map_r_2y;
+    private ArrayList<Fund> ResultFunds = null;
 
     public FundLoader(@NonNull Context context, String _api) {
         super(context);
@@ -46,7 +47,12 @@ public class FundLoader extends AsyncTaskLoader<ArrayList<Fund>> {
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        forceLoad();
+        if (ResultFunds != null)
+        {
+            Log.d("auau", "Loader had exist");
+        }
+        else
+            forceLoad();
     }
 
     @Nullable
@@ -73,8 +79,9 @@ public class FundLoader extends AsyncTaskLoader<ArrayList<Fund>> {
         token = apiManager.GetToken();
         SetReturnMap();
         String JSONResult = apiManager.GetData(token, API);
+        ResultFunds = GetFunds(JSONResult);
 
-        return GetFunds(JSONResult);
+        return ResultFunds;
     }
 
     private void SetReturnMap()
