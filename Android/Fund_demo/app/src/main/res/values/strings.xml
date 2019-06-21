@@ -5,5 +5,11 @@
     <string name="etf_label_top">推薦您推的 ETF</string>
     <string name="Btn_confirm">確定</string>
     <string name="label_finish">資料下載完成!</string>
+    <string name="label_hint">將顯示選擇之下拉選單，其指標說明</string>
+
+    <string name="risk_description">risk description</string>
+    <string name="scale_description">scale description</string>
+    <string name="beta_description">beta description</string>
+    <string name="return_description">return description</string>
 
 </resources>
