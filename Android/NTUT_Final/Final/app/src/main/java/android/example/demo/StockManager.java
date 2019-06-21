@@ -178,7 +178,7 @@ public class StockManager implements Serializable{
     {
         if (stock_map.get(_key) != null)
         {
-           return stock_map.get(_key).toArray(new StockHolder[GetSize(_key)]);
+            return stock_map.get(_key).toArray(new StockHolder[GetSize(_key)]);
         }
         return null;
     }

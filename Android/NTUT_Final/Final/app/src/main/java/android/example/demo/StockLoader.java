@@ -44,7 +44,12 @@ public class StockLoader extends AsyncTaskLoader<StockManager>
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        forceLoad();
+        if (sManager != null)
+        {
+            Log.d("auau", "loader has exist");
+        }
+        else
+            forceLoad();
     }
 
     @Nullable

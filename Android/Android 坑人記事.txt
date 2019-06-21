@@ -1,0 +1,13 @@
+Clander式從0月開始，要使用Month要注意。
+
+若有透過Bundle傳遞資料，且還會透過返回
+(up 或 實體按鍵)，一定要Override onOptionsItemSelected
+
+把 R.id.home 之 case，改執行實體按鍵的onBackPressed
+或直接Finish()，否則將會以新的Intent回到自己的parent Activity
+使Bundle資料消失，(以實體按鍵似乎是直接finish 當前Activity
+沒有這個問題)
+
+Loader要Override onStartLoadig，並給予條件，
+通常是要回傳的東西 == null，才 forceLoad，
+否則每次返回有使用到Loader的頁面，都將重新Load。

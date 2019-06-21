@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -36,11 +37,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean flag = false;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                flag = true;
+                break;
+            default:
+                flag = super.onOptionsItemSelected(item);
+                break;
+        }
+        return flag;
+    }
+
     void Initialize()
     {
-        // Are you fucking kidding me?
-        mURL = "http://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
-        //mURL = "https://ntutwebtest.000webhostapp.com/Untitled-4/view/index.php?signal=";
         recyclerView_1 = findViewById(R.id.recycleView_1);
         //recyclerView_2 = findViewById(R.id.recycleView_2);
         //tv_date = findViewById(R.id.tv_date);
@@ -49,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         //progressBar.setVisibility(View.INVISIBLE);
         SetDate();
-
-        //AsyncTask task = new PHPAsyncTask(this, recyclerView_1, recyclerView_2).execute(mURL);
     }
 
     private void SetRecycleView()
@@ -72,15 +83,6 @@ public class MainActivity extends AppCompatActivity {
             recyclerView_1.setAdapter(adapter);
             recyclerView_1.setLayoutManager(new LinearLayoutManager(this));
         }
-
-//        stockList_1 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_1");
-//        stockList_2 = (ArrayList<StockHolder>)getIntent().getExtras().get("STOCK_2");
-//        StockInfoAdapter adapter1 = new StockInfoAdapter(this, stockList_1);
-//        StockInfoAdapter adapter2 = new StockInfoAdapter(this, stockList_2);
-//        recyclerView_1.setAdapter(adapter1);
-//        recyclerView_1.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView_2.setAdapter(adapter2);
-//        recyclerView_2.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void SetDate()
@@ -100,11 +102,4 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Date", date);
         //tv_date.setText( getResources().getText(R.string.default_label_date) + date);
     }
-
-//    public void Refresh(View view) {
-//        SetDate();
-//
-//        new PHPAsyncTask(this, recyclerView_1, recyclerView_2, progressBar, tv_date, (Button)view).execute(mURL);
-//    }
-
 }

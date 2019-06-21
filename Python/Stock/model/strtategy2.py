@@ -42,6 +42,7 @@ class strategy2:
             #解析與顯示資料
             data = json.loads(data_res.text)
             args = data.get('Data')
+            title = data.get("Title")
                         
             '''
             outputfile = open("stock",'w',newline='')
@@ -51,6 +52,13 @@ class strategy2:
                 outputwriter.writerow(d)
             outputfile.close()
             '''
+            i = 0
+            for t in title:
+                print(i, end = " ")
+                print(t)
+                i += 1
+            print(args[0])
+            return
             for arg in args:
                 #print("股票代碼:" + str(arg[0]))
                 self.toCompany[str(arg[0])] = arg[1]

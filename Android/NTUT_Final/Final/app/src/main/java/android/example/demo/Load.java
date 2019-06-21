@@ -109,11 +109,18 @@ public class Load extends AppCompatActivity
 //        String API = "BABA0010-14663b";
 ////        queryBundle.putString(URL, API);
 ////        LoaderManager.getInstance(this).restartLoader(0, queryBundle, this);
-//        if(LoaderManager.getInstance(this).getLoader(0) == null)
-//        {
-//            LoaderManager.getInstance(this).initLoader(0,null,this);
-//        }
-        LoaderManager.getInstance(this).initLoader(0,null,this);
+        if(LoaderManager.getInstance(this).getLoader(0) == null)
+        {
+            LoaderManager.getInstance(this).initLoader(0,null,this);
+            Log.d("auau", "not have load");
+        }
+        else
+        {
+            LoaderManager.getInstance(this).restartLoader(0,null,this);
+            Log.d("auau", "have load");
+        }
+        //LoaderManager.getInstance(this).restartLoader(0, null, this);
+
     }
 
     public void Start(View view) {
@@ -143,8 +150,8 @@ public class Load extends AppCompatActivity
     @Override
     public Loader< StockManager > onCreateLoader(int i, @Nullable Bundle args) {
         Log.d("auau", "Start Load");
-        //String API = "BABA0010-14663b";
-        String API = "BABA0010-14644b";
+        String API = "BABA0010-14663b";     // 股票
+        //String API = "BABA0010-14644b";   // 基金
 
         //String[] stockCode = getResources().getStringArray(R.array.list_stock_code);
         //String stockData = getResources().getString(R.string.stock_data_json);
