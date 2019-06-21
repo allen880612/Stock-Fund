@@ -133,6 +133,15 @@
                     android:id="@+id/spinner_scale"
                     style="@style/spinner" />
 
+                <Button
+                    android:id="@+id/button"
+                    style="@style/button"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_style"
+                    android:onClick="GoToResult"
+                    android:text="@string/Btn_confirm" />
+
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
@@ -143,14 +152,5 @@
         <!-- label scale-->
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button"
-        style="@style/button"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_style"
-        android:onClick="GoToResult"
-        android:text="@string/Btn_confirm" />
 
 </LinearLayout>

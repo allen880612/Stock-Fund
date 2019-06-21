@@ -5,6 +5,7 @@ import android.example.fund_demo.Fund.Fund;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,6 +55,18 @@ public class Found_choice extends AppCompatActivity {
                 Log.d("auau state", "restore from create");
                 inputFunds = (ArrayList<Fund>) f_obj;
             }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                //NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -279,9 +292,9 @@ public class Found_choice extends AppCompatActivity {
             return false;
         if (!MeetReturn(fund))
             return false;
-        if (MeetBeta(fund))
+        if (!MeetBeta(fund))
             return false;
-        if (MeetScale(fund))
+        if (!MeetScale(fund))
             return false;
 
         return true;
