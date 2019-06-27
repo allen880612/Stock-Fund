@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ストック ヘルパー</string>
+    <string name="app_name">stock_6_29</string>
     <string name="text_load">Loading...</string>
     <string name="default_label_date">資料日期： </string>
     <string name="btn_start_text">開始推薦</string>
@@ -27,6 +27,6 @@
     <string name="label_company_name">公司名稱</string>
     <string name="label_info">個股資訊</string>
     <string name="zero">0.0</string>
-    <string name="label_name">ストック ヘルパー</string>
+    <string name="label_name">智能選股app</string>
 
 </resources>

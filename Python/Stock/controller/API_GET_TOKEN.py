@@ -1,7 +1,4 @@
-import requests
-import json 
-import time
-import pandas as pd
+import requests import json import time import pandas as pd
 
 class API_GET_TOKEN():
     def __init__(self,get):

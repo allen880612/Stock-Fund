@@ -49,13 +49,13 @@ public class Load extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState == null) {
-            // Set the local night mode to some value
-            getDelegate().setLocalNightMode(
-                    AppCompatDelegate.MODE_NIGHT_YES);
-            // 调用 recreate() 使设置生效
-            recreate();
-        }
+//        if (savedInstanceState == null) {
+//            // Set the local night mode to some value
+//            getDelegate().setLocalNightMode(
+//                    AppCompatDelegate.MODE_NIGHT_YES);
+//            // 调用 recreate() 使设置生效
+//            recreate();
+//        }
         setContentView(R.layout.activity_load);
 
         Initialize();
@@ -78,7 +78,7 @@ public class Load extends AppCompatActivity
 
         ArrayAdapter<CharSequence> choiceAdapter = ArrayAdapter.createFromResource(this,
                 R.array.choice_list,
-                R.layout.spinner_item);
+                R.layout.support_simple_spinner_dropdown_item);
 
         spr_choice.setAdapter(choiceAdapter);
     }
